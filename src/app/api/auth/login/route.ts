@@ -2,8 +2,18 @@ import { NextResponse } from "next/server";
 import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/auth";
+import { consumeRateLimit, requestIdentity } from "@/lib/rate-limit";
 
 export async function POST(request: Request) {
+  const origin = request.headers.get("origin");
+  if (origin && origin !== new URL(request.url).origin) return NextResponse.json({ error: "invalid_origin" }, { status: 403 });
+  try {
+    const allowed = await consumeRateLimit("admin-login", requestIdentity(request), 5, 15 * 60);
+    if (!allowed) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  } catch (error) {
+    console.error("NOKAY login rate limiter unavailable", error);
+    return NextResponse.json({ error: "service_unavailable" }, { status: 503 });
+  }
   let body: Record<string, unknown>;
   try { body = await request.json(); } catch { return NextResponse.json({ error: "invalid_payload" }, { status: 400 }); }
   const email = typeof body.email === "string" ? body.email.trim().toLowerCase().slice(0, 254) : "";

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth";
+import { requireRoles } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma";
 
 function clean(value: unknown, max: number) {
@@ -14,7 +15,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const admin = await requireAdmin();
+  const admin = await requireRoles(["SUPER_ADMIN", "ADMIN"]);
   if (!admin) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   let body: Record<string, unknown>;
   try { body = await request.json(); } catch { return NextResponse.json({ error: "invalid_payload" }, { status: 400 }); }
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
-  const admin = await requireAdmin();
+  const admin = await requireRoles(["SUPER_ADMIN", "ADMIN"]);
   if (!admin) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   let body: Record<string, unknown>;
   try { body = await request.json(); } catch { return NextResponse.json({ error: "invalid_payload" }, { status: 400 }); }

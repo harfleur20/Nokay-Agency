@@ -32,8 +32,8 @@ export function QuoteForm({ locale, initialService = "", initialPackage = "" }: 
     const data = new FormData(form);
     const details = String(data.get("details") || "");
     const message = [
-      `Forfait : ${data.get("package") || "Non précisé"}`,
-      `Démarrage : ${data.get("timeline") || "Non précisé"}`,
+      `${locale === "en" ? "Package" : "Forfait"}: ${data.get("package") || (locale === "en" ? "Not specified" : "Non précisé")}`,
+      `${locale === "en" ? "Target start" : "Démarrage"}: ${data.get("timeline") || (locale === "en" ? "Not specified" : "Non précisé")}`,
       "",
       details,
     ].join("\n");

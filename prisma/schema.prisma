@@ -208,3 +208,13 @@ model AuditLog {
   @@index([entity, entityId])
   @@index([createdAt])
 }
+
+model RateLimitBucket {
+  id        String   @id
+  key       String   @unique
+  hits      Int      @default(0)
+  resetAt   DateTime
+  createdAt DateTime @default(now())
+
+  @@index([resetAt])
+}

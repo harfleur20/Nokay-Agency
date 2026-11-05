@@ -103,3 +103,13 @@ CREATE INDEX "RateLimitBucket_resetAt_idx" ON "RateLimitBucket"("resetAt");
 ALTER TABLE "Quote" ADD COLUMN "leadId" TEXT;
 CREATE INDEX "Quote_leadId_idx" ON "Quote"("leadId");
 ALTER TABLE "Quote" ADD CONSTRAINT "Quote_leadId_fkey" FOREIGN KEY ("leadId") REFERENCES "Lead"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+CREATE TABLE "AccountInvite" (
+  "id" TEXT NOT NULL, "userId" TEXT NOT NULL, "tokenHash" TEXT NOT NULL,
+  "expiresAt" TIMESTAMP(3) NOT NULL, "usedAt" TIMESTAMP(3),
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT "AccountInvite_pkey" PRIMARY KEY ("id")
+);
+CREATE UNIQUE INDEX "AccountInvite_tokenHash_key" ON "AccountInvite"("tokenHash");
+CREATE INDEX "AccountInvite_userId_expiresAt_idx" ON "AccountInvite"("userId", "expiresAt");
+ALTER TABLE "AccountInvite" ADD CONSTRAINT "AccountInvite_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

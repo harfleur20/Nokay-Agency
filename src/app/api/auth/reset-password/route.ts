@@ -18,9 +18,8 @@ export async function POST(request: Request) {
     if (!reset || reset.usedAt || reset.expiresAt <= new Date() || !reset.user.active || reset.user.role !== "CLIENT") return NextResponse.json({ error: "token_invalid_or_expired" }, { status: 400 });
     const passwordHash = await hash(password, 12);
     await prisma.$transaction(async (tx) => {
-      const current = await tx.passwordResetToken.findUnique({ where: { id: reset.id } });
-      if (!current || current.usedAt || current.expiresAt <= new Date()) throw new Error("RESET_TOKEN_USED");
-      await tx.passwordResetToken.update({ where: { id: reset.id }, data: { usedAt: new Date() } });
+      const claimed = await tx.passwordResetToken.updateMany({ where: { id: reset.id, usedAt: null, expiresAt: { gt: new Date() } }, data: { usedAt: new Date() } });
+      if (claimed.count !== 1) throw new Error("RESET_TOKEN_USED");
       await tx.user.update({ where: { id: reset.userId }, data: { passwordHash } });
     });
     return NextResponse.json({ ok: true });

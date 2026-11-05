@@ -51,3 +51,11 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Configurer `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` et `AUTH_URL`.
 - Déclarer dans Stripe l'endpoint `/api/stripe/webhook` et au minimum les événements `checkout.session.completed`, `checkout.session.expired`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed` et `payment_intent.payment_failed`.
 - Tester en mode Stripe test avant toute activation en production. Les factures PDF, remboursements et règles de TVA ne sont pas inclus.
+
+
+## Sécurité des comptes clients
+- Le client peut accepter ou refuser un devis uniquement si celui-ci lui appartient et qu'il est au statut `SENT`.
+- La décision est atomique et inscrite dans le journal d'audit.
+- Le parcours mot de passe oublié ne révèle pas si une adresse existe.
+- Les liens de réinitialisation sont à usage unique, stockés sous forme de hash et expirent après une heure.
+- Les demandes de réinitialisation sont limitées à cinq par IP et par fenêtre de quinze minutes.

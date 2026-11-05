@@ -58,7 +58,7 @@ export function ContactForm({ locale = "fr" }: { locale?: Locale }) {
           <label>{t.message}<textarea name="message" rows={5} required minLength={20} maxLength={5000} placeholder={t.messageHint} /></label>
           <label className="contact-consent"><input type="checkbox" name="consent" value="yes" required /><span>{t.consent}</span></label>
           <div className="contact-trap" aria-hidden="true"><label>Leave this field empty<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
-          <button className="contact-submit" type="submit" disabled={status === "sending"}>{status === "sending" ? t.sending : t.submit}<span aria-hidden="true">↗</span></button>
+          <button className="contact-submit" type="submit" disabled={status === "sending"}>{status === "sending" ? t.sending : t.submit}<span aria-hidden="true">⟶</span></button>
           <p className="contact-privacy">{t.privacy}</p>
           {feedback && <p className={`contact-feedback contact-feedback--${status}`} role="status" aria-live="polite">{feedback}</p>}
         </form>

@@ -72,7 +72,7 @@ export default async function Home() {
         <EditorialAccordion items={steps} locale="fr" className="process-accordion" />
       </div></section>
 
-      <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Et si on construisait la suite ?</p><h2>Votre prochaine<br />idée mérite <span>mieux.</span></h2><a href="#contact" className="manifesto__link">Parlons de votre projet <span>↗</span></a></div></section>
+      <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Et si on construisait la suite ?</p><h2>Votre prochaine<br />idée mérite <span>mieux.</span></h2><a href="#contact" className="manifesto__link">Parlons de votre projet</a></div></section>
 
       <ContactForm locale="fr" />
       <footer className="site-footer"><div className="section-shell">

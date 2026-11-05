@@ -39,7 +39,6 @@ export default async function Home() {
 
       <section className="hero section-shell">
         <div className="hero__content">
-          <Reveal><p className="eyebrow"><span className="eyebrow__line" /> Studio digital indépendant · Créativité & technologie</p></Reveal>
           <Reveal delay={0.08}><h1>Ideas into<br /><span>digital</span> experiences<span className="hero__period">.</span></h1></Reveal>
           <Reveal delay={0.16}>
             <div className="hero__bottom">

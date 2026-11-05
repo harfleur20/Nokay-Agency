@@ -38,7 +38,7 @@
 ## Phase 4 — Back-office
 - [ ] Gestion clients, rôles et permissions granulaires
 - [x] Gestion initiale des prestations (création, activation/désactivation) depuis le back-office
-- [ ] Gestion des projets, jalons et tâches
+- [x] Gestion initiale des projets, étapes, progression et actualités client depuis le back-office
 - [ ] CMS, portfolio et références
 - [ ] Traductions, notifications et journal d'audit complet
 

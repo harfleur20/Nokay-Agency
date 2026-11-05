@@ -65,8 +65,41 @@ export async function PATCH(request: Request) {
   const status = clean(body.status, 20);
   if (!id || !Object.values(QuoteStatus).includes(status as QuoteStatus)) return NextResponse.json({ error: "invalid_fields" }, { status: 400 });
   try {
+    const existing = await prisma.quote.findUnique({ where: { id }, include: { client: true } });
+    if (!existing) return NextResponse.json({ error: "quote_not_found" }, { status: 404 });
+
+    if (status === QuoteStatus.SENT) {
+      const apiKey = process.env.RESEND_API_KEY;
+      const recipient = process.env.CONTACT_EMAIL;
+      const sender = process.env.RESEND_FROM_EMAIL;
+      if (!apiKey || !recipient || !sender) return NextResponse.json({ error: "email_not_configured" }, { status: 503 });
+      const amount = (existing.amountCents / 100).toLocaleString("fr-FR", { style: "currency", currency: existing.currency });
+      const text = [
+        `Bonjour ${existing.client.name},`,
+        "",
+        "Veuillez trouver ci-dessous votre proposition commerciale NOKAY.",
+        `Référence : ${existing.reference}`,
+        `Projet : ${existing.title}`,
+        `Montant : ${amount} HT`,
+        existing.description || "",
+        existing.validUntil ? `Offre valable jusqu'au ${existing.validUntil.toLocaleDateString("fr-FR")}.` : "",
+        "",
+        "Pour toute question, répondez directement à cet e-mail.",
+        "L'équipe NOKAY",
+      ].filter(Boolean).join("\\n");
+      const sent = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ from: sender, to: [existing.client.email], reply_to: recipient, subject: `NOKAY — Votre proposition ${existing.reference}`, text }),
+      });
+      if (!sent.ok) return NextResponse.json({ error: "quote_email_failed" }, { status: 502 });
+    }
+
     const quote = await prisma.quote.update({ where: { id }, data: { status: status as QuoteStatus } });
-    await prisma.auditLog.create({ data: { actorId: admin.id, action: "quote.status.updated", entity: "Quote", entityId: id, metadata: { status } } });
+    await prisma.auditLog.create({ data: { actorId: admin.id, action: status === QuoteStatus.SENT ? "quote.sent" : "quote.status.updated", entity: "Quote", entityId: id, metadata: { status } } });
     return NextResponse.json({ ok: true, status: quote.status });
-  } catch { return NextResponse.json({ error: "quote_not_found" }, { status: 404 }); }
+  } catch (error) {
+    console.error("NOKAY quote status update failed", error);
+    return NextResponse.json({ error: "quote_update_failed" }, { status: 500 });
+  }
 }

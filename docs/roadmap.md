@@ -23,7 +23,7 @@
 - [x] Première interface admin protégée par session HTTP-only
 - [x] Connexion administrateur et création initiale via seed
 - [x] Consultation des demandes, filtres de statut et journal d'audit des changements
-- [ ] Limitation de débit persistante sur les endpoints publics et de connexion
+- [x] Limitation de débit persistante PostgreSQL sur les endpoints publics et de connexion
 - [ ] Recherche, filtres avancés, export CSV et assignation des leads
 - [ ] Tests d'intégration DB et tests de sécurité
 

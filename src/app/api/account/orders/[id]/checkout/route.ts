@@ -22,12 +22,22 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     const remaining = order.amountCents - paid;
     if (remaining <= 0) return NextResponse.json({ error: "order_already_paid" }, { status: 409 });
     const amountCents = paid === 0 && order.depositCents ? Math.min(order.depositCents, remaining) : remaining;
+    const stripe = getStripe();
     const existingPending = order.payments.find((payment) => payment.status === PaymentStatus.PENDING);
-    if (existingPending) return NextResponse.json({ error: "payment_already_pending" }, { status: 409 });
+    if (existingPending?.providerCheckoutSessionId) {
+      const existingSession = await stripe.checkout.sessions.retrieve(existingPending.providerCheckoutSessionId);
+      if (existingSession.status === "open" && existingSession.url) return NextResponse.json({ url: existingSession.url });
+      if (existingSession.status === "expired") {
+        await prisma.payment.update({ where: { id: existingPending.id }, data: { status: PaymentStatus.FAILED } });
+      } else {
+        return NextResponse.json({ error: "payment_already_pending" }, { status: 409 });
+      }
+    } else if (existingPending) {
+      return NextResponse.json({ error: "payment_already_pending" }, { status: 409 });
+    }
 
     const idempotencyKey = randomBytes(24).toString("hex");
     const payment = await prisma.payment.create({ data: { orderId: order.id, amountCents, currency: order.currency.toLowerCase(), status: PaymentStatus.PENDING, idempotencyKey } });
-    const stripe = getStripe();
     const baseUrl = (process.env.AUTH_URL || new URL(request.url).origin).replace(/\/$/, "");
     try {
       const session = await stripe.checkout.sessions.create({
@@ -41,6 +51,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
         payment_intent_data: { metadata: { paymentId: payment.id, orderId: order.id } },
       }, { idempotencyKey });
       if (!session.url) throw new Error("Stripe did not return a checkout URL.");
+      await prisma.payment.update({ where: { id: payment.id }, data: { providerCheckoutSessionId: session.id } });
       return NextResponse.json({ url: session.url });
     } catch (error) {
       await prisma.payment.update({ where: { id: payment.id }, data: { status: PaymentStatus.FAILED } });

@@ -18,7 +18,7 @@ export default async function AdminDashboard() {
     prisma.lead.count({ where: { status: "NEW" } }),
     prisma.lead.count({ where: { status: "WON" } }),
   ]);
-  return <main className="admin-page"><header className="admin-topbar"><a href="/" className="brand">NOKAY<span>.</span></a><div>{admin.role !== "PROJECT_MANAGER" && <><a href="/admin/services">Prestations ↗</a><a href="/admin/quotes">Devis ↗</a></>}<a href="/admin/projects">Projets ↗</a><span>{admin.name} · {admin.role}</span><LogoutButton /></div></header>
+  return <main className="admin-page"><header className="admin-topbar"><a href="/" className="brand">NOKAY<span>.</span></a><div>{admin.role !== "PROJECT_MANAGER" && <><a href="/admin/services">Prestations ↗</a><a href="/admin/quotes">Devis ↗</a><a href="/admin/portfolio">Portfolio ↗</a></>}<a href="/admin/projects">Projets ↗</a><span>{admin.name} · {admin.role}</span><LogoutButton /></div></header>
     <section className="admin-content"><p className="eyebrow">ESPACE DE GESTION / NOKAY</p><h1>Tableau de bord<span>.</span></h1><p className="admin-subtitle">Suivez les demandes entrantes et leur avancement.</p>
       <div className="admin-stats"><article><span>Total demandes</span><strong>{total}</strong></article><article><span>Nouvelles</span><strong>{newCount}</strong></article><article><span>Projets gagnés</span><strong>{wonCount}</strong></article></div>
       <div className="admin-table-heading"><h2>Demandes de devis</h2><span>{leads.length} dernières demandes</span></div>

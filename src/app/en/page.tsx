@@ -74,7 +74,7 @@ export default async function EnglishHome() {
         <EditorialAccordion items={steps} locale="en" className="process-accordion" />
       </div></section>
 
-      <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Ready to build what's next?</p><h2>Your next idea<br />deserves <span>better.</span></h2><a href="#contact" className="manifesto__link">Let's talk about your project <span>↗</span></a></div></section>
+      <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Ready to build what's next?</p><h2>Your next idea<br />deserves <span>better.</span></h2><a href="#contact" className="manifesto__link">Let's talk about your project</a></div></section>
 
       <ContactForm locale="en" />
       <footer className="site-footer"><div className="section-shell">

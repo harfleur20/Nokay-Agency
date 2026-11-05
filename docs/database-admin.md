@@ -26,7 +26,8 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 ## Sécurité et exploitation
 - Ne jamais committer `.env`, mots de passe, secrets JWT ou clés de fournisseur.
 - Créer le compte administrateur via le seed, puis retirer les variables ADMIN_* de l'environnement de déploiement après l'initialisation si le seed n'est plus utilisé.
-- Prévoir une limitation de débit persistante (Redis/KV ou WAF) avant ouverture publique.
+- Limitation persistante PostgreSQL : 5 demandes publiques par IP et par fenêtre de 15 minutes ; 5 tentatives de connexion admin par IP et par fenêtre de 15 minutes. Les identifiants réseau sont hachés et non conservés en clair.
+- Vérifier que le proxy de production fournit un en-tête client IP fiable (`x-real-ip` ou `x-forwarded-for`) ; configurer le proxy pour empêcher l’usurpation de cet en-tête.
 - Activer sauvegardes PostgreSQL chiffrées et tester régulièrement une restauration.
 - Définir la durée de conservation et la procédure d'effacement des demandes conformément au RGPD.
 - Les rôles PROJECT_MANAGER et ADMIN ont actuellement le même accès au tableau des leads ; les permissions fines restent à implémenter.

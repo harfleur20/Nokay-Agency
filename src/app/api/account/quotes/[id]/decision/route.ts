@@ -12,7 +12,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   const decision = body.decision;
   if (!id || ![ "accept", "reject" ].includes(String(decision))) return NextResponse.json({ error: "invalid_fields" }, { status: 400 });
   const result = await prisma.quote.updateMany({
-    where: { id, clientId: client.id, status: QuoteStatus.SENT },
+    where: { id, clientId: client.id, status: QuoteStatus.SENT, OR: [{ validUntil: null }, { validUntil: { gt: new Date() } }] },
     data: { status: decision === "accept" ? QuoteStatus.ACCEPTED : QuoteStatus.REJECTED, acceptedAt: decision === "accept" ? new Date() : null },
   });
   if (result.count !== 1) return NextResponse.json({ error: "quote_not_available" }, { status: 404 });

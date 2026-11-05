@@ -21,9 +21,9 @@ const services = [
 ];
 
 const concepts = [
-  { number: "01", type: "E-commerce concept", title: "MONOCHROME", description: "An editorial art direction for a lifestyle brand.", tone: "project-card--lime", mark: "M." },
-  { number: "02", type: "SaaS concept", title: "NEXORA", description: "A product dashboard focused on data clarity.", tone: "project-card--violet", mark: "N/" },
-  { number: "03", type: "Brand concept", title: "FORME STUDIO", description: "A modular visual universe for a creative brand.", tone: "project-card--orange", mark: "F." },
+  { number: "01", type: "E-commerce concept", title: "MONOCHROME", description: "An editorial art direction for a lifestyle brand.", tone: "project-card--lime", mark: "M.", imageUrl: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=82" },
+  { number: "02", type: "SaaS concept", title: "NEXORA", description: "A product dashboard focused on data clarity.", tone: "project-card--violet", mark: "N/", imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=82" },
+  { number: "03", type: "Brand concept", title: "FORME STUDIO", description: "A modular visual universe for a creative brand.", tone: "project-card--orange", mark: "F.", imageUrl: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1000&q=82" },
 ];
 
 const steps = [
@@ -39,7 +39,7 @@ export default async function EnglishHome() {
   let portfolioItems: Awaited<ReturnType<typeof prisma.portfolioItem.findMany>> = [];
   try { portfolioItems = await prisma.portfolioItem.findMany({ where: { published: true }, orderBy: { createdAt: "desc" }, take: 6 }); }
   catch (error) { console.error("NOKAY portfolio could not be loaded", error); }
-  const projects = portfolioItems.length ? portfolioItems.map((item, index) => ({ number: String(index + 1).padStart(2, "0"), type: item.category, title: item.title, description: item.summary, tone: ["project-card--lime", "project-card--violet", "project-card--orange"][index % 3], mark: `${item.title.slice(0, 1).toUpperCase()}.`, isConcept: item.isConcept, imageUrl: item.imageUrl, projectUrl: item.projectUrl })) : concepts.map((item) => ({ ...item, isConcept: true, imageUrl: null, projectUrl: null }));
+  const projects = portfolioItems.length ? portfolioItems.map((item, index) => ({ number: String(index + 1).padStart(2, "0"), type: item.category, title: item.title, description: item.summary, tone: ["project-card--lime", "project-card--violet", "project-card--orange"][index % 3], mark: `${item.title.slice(0, 1).toUpperCase()}.`, isConcept: item.isConcept, imageUrl: item.imageUrl, projectUrl: item.projectUrl })) : concepts.map((item) => ({ ...item, isConcept: true, imageUrl: item.imageUrl, projectUrl: null }));
   return (
     <main id="top" lang="en">
       <SiteHeader locale="en" />
@@ -47,7 +47,7 @@ export default async function EnglishHome() {
         <div className="hero__orb hero__orb--one" aria-hidden="true" />
         <div className="hero__orb hero__orb--two" aria-hidden="true" />
         <div className="hero__content">
-          <Reveal><p className="eyebrow"><span className="eyebrow__line" /> Creative & technology digital agency</p></Reveal>
+          <Reveal><p className="eyebrow"><span className="eyebrow__line" /> Independent digital studio · Creative technology</p></Reveal>
           <Reveal delay={0.08}><h1>Ideas into<br /><span>digital</span> experiences<span className="hero__period">.</span></h1></Reveal>
           <Reveal delay={0.16}><div className="hero__bottom"><p>We turn ambitious ideas into digital experiences that are useful, desirable and memorable.</p><a className="round-link" href="#expertises" aria-label="Explore our expertise">↓</a></div></Reveal>
         </div>

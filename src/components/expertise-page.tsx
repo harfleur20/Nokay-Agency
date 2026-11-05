@@ -13,7 +13,7 @@ export function ExpertisePage({ content, locale, otherServices }: {
 }) {
   const en = locale === "en";
   return (
-    <main id="top">
+    <main id="top" lang={locale}>
       <SiteHeader locale={locale} homeHref={locale === "en" ? "/en" : "/"} />
       <section className="detail-hero section-shell">
         <Reveal><p className="eyebrow"><span className="eyebrow__line" /> {content.eyebrow}</p></Reveal>

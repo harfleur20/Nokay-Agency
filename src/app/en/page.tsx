@@ -34,7 +34,7 @@ const steps = [
 
 export default function EnglishHome() {
   return (
-    <main id="top">
+    <main id="top" lang="en">
       <SiteHeader locale="en" />
       <section className="hero section-shell">
         <div className="hero__orb hero__orb--one" aria-hidden="true" />

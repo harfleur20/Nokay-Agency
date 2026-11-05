@@ -99,3 +99,7 @@ CREATE TABLE "RateLimitBucket" (
 );
 CREATE UNIQUE INDEX "RateLimitBucket_key_key" ON "RateLimitBucket"("key");
 CREATE INDEX "RateLimitBucket_resetAt_idx" ON "RateLimitBucket"("resetAt");
+
+ALTER TABLE "Quote" ADD COLUMN "leadId" TEXT;
+CREATE INDEX "Quote_leadId_idx" ON "Quote"("leadId");
+ALTER TABLE "Quote" ADD CONSTRAINT "Quote_leadId_fkey" FOREIGN KEY ("leadId") REFERENCES "Lead"("id") ON DELETE SET NULL ON UPDATE CASCADE;

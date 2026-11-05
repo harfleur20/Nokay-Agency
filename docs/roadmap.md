@@ -4,17 +4,22 @@
 - [x] Dépôt et documentation initiale
 - [x] Architecture cible
 - [x] Squelette Next.js / TypeScript / Tailwind
+- [x] Première navigation responsive
+- [x] Première vitrine et tokens graphiques
+- [x] Documentation de la direction technique
 - [ ] Installation locale et validation du build
-- [ ] Convention de branches, commits et pull requests
-- [ ] CI GitHub Actions
+- [ ] CI GitHub Actions exécutée avec succès
 
 ## Phase 1 — Design system et expérience publique
-- [ ] Identité visuelle et tokens
-- [ ] Navigation responsive
-- [ ] Accueil immersif et animations accessibles
-- [ ] Pages expertises, portfolio, références, processus, à propos et contact
+- [x] Direction visuelle initiale (noir, ivoire, vert électrique)
+- [x] Navigation responsive
+- [x] Accueil immersif initial et animations accessibles
+- [x] Sections expertises, concepts portfolio, références et processus
+- [ ] Pages détaillées par expertise
 - [ ] Internationalisation française / anglaise
-- [ ] SEO, métadonnées et données structurées
+- [ ] Formulaire de contact fonctionnel
+- [ ] SEO technique complet, métadonnées sociales et données structurées
+- [ ] Vérification accessibilité et responsive sur appareils réels
 
 ## Phase 2 — Catalogue et acquisition
 - [ ] Catalogue de prestations

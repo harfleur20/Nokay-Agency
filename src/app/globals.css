@@ -38,8 +38,8 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 .header-cta span { margin-left: 10px; color: var(--accent); }
 .menu-toggle, .mobile-nav { display: none; }
 
-.hero { position: relative; min-height: min(790px, calc(100svh - 82px)); display: flex; align-items: center; isolation: isolate; }
-.hero__content { position: relative; z-index: 2; width: 100%; padding-block: 110px 125px; }
+.hero { position: relative; min-height: max(720px, min(790px, calc(100svh - 82px))); display: flex; align-items: center; isolation: isolate; }
+.hero__content { position: relative; z-index: 2; width: 100%; padding-block: 76px 92px; }
 .eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 28px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .2em; line-height: 1.5; text-transform: uppercase; }
 .eyebrow__line { width: 30px; height: 1px; background: var(--accent); }
 .hero h1 { max-width: 1050px; margin: 0; font-size: clamp(68px, 10.8vw, 154px); font-weight: 650; line-height: .88; letter-spacing: -.085em; }
@@ -142,8 +142,8 @@ section[id], footer[id] { scroll-margin-top: 88px; }
   .mobile-nav.is-open { max-height: 320px; padding-block: 12px 20px; border-bottom: 1px solid var(--border); }
   .mobile-nav a { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
   .mobile-nav a span { color: var(--accent); }
-  .hero { min-height: 690px; min-height: min(760px, calc(100svh - 72px)); }
-  .hero__content { padding-block: 90px 110px; }
+  .hero { min-height: max(680px, min(760px, calc(100svh - 72px))); }
+  .hero__content { padding-block: 58px 76px; }
   .hero h1 { font-size: clamp(60px, 13vw, 100px); }
   .hero__orb--one { width: 330px; height: 330px; right: -150px; top: 14%; }
   .hero__orb--two { width: 230px; height: 230px; right: -100px; top: 23%; }
@@ -161,8 +161,8 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 }
 @media (max-width: 520px) {
   .section-shell, .site-header__inner { width: calc(100% - 40px); }
-  .hero { min-height: 650px; }
-  .hero__content { padding-block: 70px 100px; }
+  .hero { min-height: 660px; }
+  .hero__content { padding-block: 46px 64px; }
   .eyebrow { font-size: 8px; letter-spacing: .15em; }
   .hero h1 { font-size: clamp(54px, 15vw, 78px); }
   .hero__bottom { align-items: center; margin-top: 42px; }

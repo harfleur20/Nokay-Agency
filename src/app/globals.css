@@ -441,3 +441,10 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 .quote-decision .quote-reject { color: #b8bac0; }
 .quote-decision button:disabled { opacity: .6; cursor: wait; }
 .quote-decision small { display: block; margin-top: 6px; color: #ff9b9b; font-size: 10px; }
+
+.portfolio-checks { display: flex; flex-wrap: wrap; gap: 20px; }
+.portfolio-checks label { display: flex; align-items: center; gap: 8px; color: #b8bac0; font-size: 11px; }
+.portfolio-checks input { accent-color: var(--accent); }
+.portfolio-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.portfolio-actions button { padding: 8px 10px; border: 1px solid rgba(245,245,242,.2); background: transparent; color: #f5f5f2; font-size: 10px; cursor: pointer; }
+.portfolio-project-link { display: inline-block; margin-top: 14px; color: var(--accent); font-size: 11px; }

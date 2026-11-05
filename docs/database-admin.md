@@ -80,3 +80,10 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - `PROJECT_MANAGER` peut gérer les projets et publier les actualités ; il peut également consulter et qualifier les leads.
 - Tous les endpoints de mutation vérifient le rôle côté serveur. Le masquage d'éléments d'interface n'est jamais utilisé comme contrôle d'accès.
 - La gestion de l'équipe, la création/révocation des comptes internes et les permissions plus fines restent à construire.
+
+
+## Portfolio public
+- Les administrateurs peuvent créer, publier/dépublier et qualifier une réalisation comme concept ou projet réel.
+- Les pages d'accueil FR/EN affichent les réalisations publiées depuis PostgreSQL.
+- Si la base est momentanément indisponible ou si aucune réalisation n'est publiée, les trois concepts de démonstration sont conservés et identifiés comme concepts.
+- Les URLs image et projet doivent être HTTP(S). Les références clients doivent être publiées uniquement avec autorisation.

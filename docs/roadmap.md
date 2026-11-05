@@ -36,7 +36,8 @@
 - [ ] Factures, remboursements et historique de paiement
 
 ## Phase 4 — Back-office
-- [ ] Gestion clients, rôles et permissions granulaires
+- [x] Permissions par rôle sur les mutations du back-office (admin/super-admin vs gestionnaire de projet)
+- [ ] Gestion des utilisateurs et invitations d’équipe
 - [x] Gestion initiale des prestations (création, activation/désactivation) depuis le back-office
 - [x] Gestion initiale des projets, étapes, progression et actualités client depuis le back-office
 - [ ] CMS, portfolio et références

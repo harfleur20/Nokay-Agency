@@ -44,7 +44,7 @@ const expertiseContent: Record<"fr" | "en", Expertise[]> = {
       { title: "Showcase website", description: "Present your business with impact", href: "/en/expertise/websites", icon: "monitor" },
       { title: "Web application", description: "Build tools tailored to your workflows", href: "/en/expertise/web-applications", icon: "code" },
       { title: "Custom development", description: "Create the features your project needs", href: "/en/expertise/web-applications", icon: "layers" },
-      { title: "SaaS", description: "Turn your idea into a scalable product", href: "/expertises/saas", icon: "cloud" },
+      { title: "SaaS", description: "Turn your idea into a scalable product", href: "/en/expertise/saas", icon: "cloud" },
     ]},
     { id: "seo-geo", title: "SEO / GEO", description: "Grow your visibility across search engines and AI.", services: [
       { title: "Organic search", description: "Improve your visibility on Google", href: "/en/expertise/seo-geo", icon: "search" },

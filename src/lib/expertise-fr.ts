@@ -39,6 +39,26 @@ export const expertiseFr = {
     process: "Nous explorons plusieurs directions créatives à partir de votre positionnement. La piste retenue est développée en un système cohérent, documenté et décliné selon vos besoins.",
     cta: "Donnons forme à votre identité",
   },
+  "seo-geo": {
+    title: "SEO / GEO",
+    eyebrow: "Visibilité & découverte",
+    intro: "Faites en sorte que votre activité soit trouvée, comprise et recommandée sur les moteurs de recherche comme dans les réponses générées par les intelligences artificielles.",
+    description: "Nous travaillons les fondations de votre visibilité organique : structure, contenus, performance et présence dans les nouveaux parcours de recherche. Une stratégie claire, pensée pour attirer une audience qualifiée dans la durée.",
+    outcomes: ["Une meilleure compréhension de votre offre par les moteurs", "Des contenus utiles alignés sur les intentions de recherche", "Une base technique saine et accessible", "Une visibilité préparée aux usages de recherche par IA"],
+    deliverables: ["Audit SEO technique et éditorial", "Recherche de mots-clés et intentions", "Optimisation des pages et des métadonnées", "Structuration des contenus et données", "Recommandations GEO et visibilité IA", "Suivi des indicateurs et plan d'amélioration"],
+    process: "Nous commençons par analyser votre présence et vos objectifs. Nous identifions les priorités techniques et éditoriales, déployons les optimisations puis suivons les résultats pour ajuster la stratégie.",
+    cta: "Développons votre visibilité",
+  },
+  "publicite-en-ligne": {
+    title: "Publicité en ligne",
+    eyebrow: "Acquisition & performance",
+    intro: "Faites connaître votre offre auprès des bonnes personnes grâce à des campagnes publicitaires conçues autour de vos objectifs.",
+    description: "De la stratégie d'acquisition à l'optimisation des campagnes, nous vous aidons à structurer une présence publicitaire cohérente, à maîtriser vos investissements et à transformer l'attention en opportunités.",
+    outcomes: ["Des campagnes alignées sur vos objectifs", "Des audiences et messages mieux ciblés", "Un budget piloté avec méthode", "Des performances mesurées et optimisées"],
+    deliverables: ["Définition des objectifs et indicateurs", "Choix des canaux et audiences", "Conception des annonces et messages", "Paramétrage et lancement des campagnes", "Suivi des conversions et performances", "Optimisations et recommandations"],
+    process: "Nous définissons les objectifs et les audiences prioritaires, préparons les messages et les campagnes, puis analysons les données pour améliorer progressivement les résultats.",
+    cta: "Préparons vos campagnes",
+  },
 } as const;
 
 export type ExpertiseSlug = keyof typeof expertiseFr;

@@ -8,6 +8,8 @@ const labels = {
   "web-applications": "Web applications",
   saas: "SaaS products",
   "design-communication": "Design & communication",
+  "seo-geo": "SEO / GEO",
+  "online-advertising": "Online advertising",
 } as const;
 
 export function generateStaticParams() { return Object.keys(expertiseEn).map((slug) => ({ slug })); }

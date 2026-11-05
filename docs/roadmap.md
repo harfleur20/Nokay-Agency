@@ -52,7 +52,8 @@
 - [ ] Contrôle d'isolation des données entre clients
 
 ## Phase 6 — Qualité, conformité et lancement
-- [ ] Migrations Prisma versionnées et stratégie de sauvegarde/restauration
+- [x] Migrations Prisma incrémentales versionnées (sans réécriture des migrations appliquées)
+- [ ] Stratégie de sauvegarde/restauration
 - [ ] Tests unitaires, intégration et E2E
 - [ ] Audit sécurité et permissions
 - [ ] Accessibilité WCAG 2.2 AA

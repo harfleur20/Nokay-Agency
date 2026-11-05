@@ -14,7 +14,7 @@ export function ExpertisePage({ content, locale, otherServices }: {
   const en = locale === "en";
   return (
     <main id="top">
-      <SiteHeader locale={locale} />
+      <SiteHeader locale={locale} homeHref={locale === "en" ? "/en" : "/"} />
       <section className="detail-hero section-shell">
         <Reveal><p className="eyebrow"><span className="eyebrow__line" /> {content.eyebrow}</p></Reveal>
         <Reveal delay={0.08}><h1>{content.title}<span>.</span></h1></Reveal>

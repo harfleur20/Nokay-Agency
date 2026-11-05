@@ -54,7 +54,7 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 .hero__orb--two { width: 350px; height: 350px; right: -15px; top: 18%; border-color: rgba(245,245,242,.1); }
 .hero__index { position: absolute; right: 0; bottom: 32px; display: flex; gap: 24px; color: #777980; font-size: 9px; letter-spacing: .16em; }
 
-.intro-band { border-block: 1px solid var(--border); background: #17191b; }
+.intro-band { border: 0; background: #17191b; }
 .intro-band__inner { min-height: 220px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
 .intro-band p { margin: 0; font-size: clamp(25px, 4vw, 49px); font-weight: 600; line-height: 1.18; letter-spacing: -.055em; }
 .intro-band p span { color: #85878e; }

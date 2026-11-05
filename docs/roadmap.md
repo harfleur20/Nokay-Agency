@@ -44,7 +44,7 @@
 
 ## Phase 5 — Espace client
 - [x] Activation de compte client par invitation sécurisée et authentification
-- [ ] Récupération et réinitialisation de mot de passe
+- [x] Récupération et réinitialisation de mot de passe par lien à usage unique
 - [x] Tableau de bord client et suivi de projet (lecture)
 - [x] Consultation des devis, commandes et paiements enregistrés
 - [ ] Paiement en ligne et téléchargement des factures

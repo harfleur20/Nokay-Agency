@@ -1,0 +1,43 @@
+export const expertiseEn = {
+  websites: {
+    title: "Websites",
+    eyebrow: "Visibility & conversion",
+    intro: "Your online presence should do more than introduce your business. It should communicate your value, build trust and inspire action.",
+    description: "NOKAY designs fast, accessible websites that are easy to evolve. From content strategy to launch, every decision supports your identity and business goals.",
+    outcomes: ["A coherent and memorable digital identity", "A seamless experience across devices", "A structure designed for search visibility", "Content and calls to action focused on conversion"],
+    deliverables: ["Discovery workshop and sitemap", "Art direction and UI design", "Responsive development", "Integration of supplied content", "Core technical SEO setup", "Quality checks, launch and handover"],
+    process: "We start by understanding your business and audience. We then define key pages and messages, validate the design, build the website and test it before handover.",
+    cta: "Let's discuss your website",
+  },
+  "web-applications": {
+    title: "Web applications",
+    eyebrow: "Tools & experiences",
+    intro: "Turn your processes into digital tools that are simple, reliable and built around the reality of your teams.",
+    description: "Business portals, user spaces, booking platforms or internal tools: we design custom web applications with a strong focus on usability and security.",
+    outcomes: ["User journeys shaped around real needs", "Features aligned with your workflows", "Responsive and accessible interfaces", "A maintainable, evolvable technical foundation"],
+    deliverables: ["Functional discovery and user flows", "Architecture and specifications", "Prototypes and UI design", "Frontend and backend development", "Functional testing and security measures", "Documentation and handover"],
+    process: "We break the project down into prioritised features. We define, prototype and build a useful first scope, then improve it iteratively based on feedback and validated needs.",
+    cta: "Tell us about your application",
+  },
+  saas: {
+    title: "SaaS products",
+    eyebrow: "From product to scale",
+    intro: "Build a software product that solves a real problem and grows with the people who use it.",
+    description: "From a first usable release to an existing product's next stage, NOKAY supports product experience, feature design and software development.",
+    outcomes: ["A clear product value proposition", "An MVP focused on essential use cases", "Structured account and user journeys", "A foundation designed for future evolution"],
+    deliverables: ["Product discovery and MVP prioritisation", "User journeys, wireframes and prototype", "Interface design", "Feature development", "Testing, feedback and iteration", "Delivery documentation"],
+    process: "We identify the problem, prioritise the features that create the most value and build a testable first release. Further improvements are guided by observed usage.",
+    cta: "Let's build your product",
+  },
+  "design-communication": {
+    title: "Design & communication",
+    eyebrow: "Identity & expression",
+    intro: "A strong brand is more than a logo. It expresses itself consistently at every touchpoint.",
+    description: "We create visual systems and communication assets that make your brand recognisable, from the first screen to your campaigns.",
+    outcomes: ["A distinctive visual identity", "A coherent graphic language", "Clearer, more intuitive interfaces", "Visual content adapted to your channels"],
+    deliverables: ["Creative research and moodboards", "Logo and identity system", "Brand guidelines and variations", "UI/UX and interface design", "Communication assets", "Motion design and animated content"],
+    process: "We explore creative directions based on your positioning. The selected route is developed into a coherent, documented system and adapted to your needs.",
+    cta: "Let's shape your identity",
+  },
+} as const;
+export type ExpertiseEnSlug = keyof typeof expertiseEn;

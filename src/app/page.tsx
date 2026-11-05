@@ -31,7 +31,7 @@ const steps = [
 export default async function Home() {
   let portfolioItems: Awaited<ReturnType<typeof prisma.portfolioItem.findMany>> = [];
   try { portfolioItems = await prisma.portfolioItem.findMany({ where: { published: true }, orderBy: { createdAt: "desc" }, take: 6 }); }
-  catch (error) { console.error("NOKAY portfolio could not be loaded", error); }
+  catch (error) { console.error("Osez portfolio could not be loaded", error); }
   const projects = portfolioItems.length ? portfolioItems.map((item, index) => ({ number: String(index + 1).padStart(2, "0"), type: item.category, title: item.title, description: item.summary, tone: ["project-card--lime", "project-card--violet", "project-card--orange"][index % 3], mark: `${item.title.slice(0, 1).toUpperCase()}.`, isConcept: item.isConcept, imageUrl: item.imageUrl, projectUrl: item.projectUrl })) : concepts.map((item) => ({ ...item, isConcept: true, imageUrl: item.imageUrl, projectUrl: null }));
   return (
     <main id="top">
@@ -76,8 +76,8 @@ export default async function Home() {
 
       <ContactForm locale="fr" />
       <footer className="site-footer"><div className="section-shell">
-        <div className="site-footer__top"><a href="#top" className="brand brand--footer">NOKAY<span>.</span></a><p>Ideas into digital experiences.</p><a className="footer-contact" href="#expertises">Découvrir nos expertises ↗</a></div>
-        <div className="site-footer__bottom"><span>© {new Date().getFullYear()} NOKAY. Tous droits réservés.</span><span>Créativité · Technologie · Expérience</span><a href="#top">Retour en haut ↑</a></div>
+        <div className="site-footer__top"><a href="#top" className="brand brand--footer">Osez<span>.</span></a><p>Ideas into digital experiences.</p><a className="footer-contact" href="#expertises">Découvrir nos expertises ↗</a></div>
+        <div className="site-footer__bottom"><span>© {new Date().getFullYear()} Osez. Tous droits réservés.</span><span>Créativité · Technologie · Expérience</span><a href="#top">Retour en haut ↑</a></div>
       </div></footer>
     </main>
   );

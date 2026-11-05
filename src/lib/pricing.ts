@@ -4,7 +4,7 @@ export const pricing = {
   fr: {
     eyebrow: "Offres de lancement · Studio digital indépendant",
     title: "Du digital de qualité,<br />à un prix <em>accessible.</em>",
-    intro: "NOKAY démarre son activité : profitez de tarifs de lancement pour les premiers projets. Des périmètres précis, des livrables concrets et aucun coût caché.",
+    intro: "Osez démarre son activité : profitez de tarifs de lancement pour les premiers projets. Des périmètres précis, des livrables concrets et aucun coût caché.",
     note: "Tarifs de lancement en euros, réservés aux premiers projets et susceptibles d’évoluer. Le devis précise les taxes applicables selon votre statut et votre pays. Le prix et le périmètre sont confirmés avant tout démarrage. Hébergement, nom de domaine, licences et services tiers ne sont pas inclus.",
     categories: [
       { id: "websites", title: "Sites vitrines", intro: "Pour présenter votre activité, rassurer vos visiteurs et recevoir des demandes de contact.", packages: [
@@ -39,7 +39,7 @@ export const pricing = {
   en: {
     eyebrow: "Launch offers · Independent digital studio",
     title: "Thoughtful digital work,<br />at an <em>accessible price.</em>",
-    intro: "NOKAY is opening its doors: get launch pricing on the first projects. Clear scopes, tangible deliverables and no hidden costs.",
+    intro: "Osez is opening its doors: get launch pricing on the first projects. Clear scopes, tangible deliverables and no hidden costs.",
     note: "Prices are shown in USD as a reference for US clients. Other currencies and applicable taxes are confirmed in your quote based on your country and status. Hosting, domains, licences and third-party services are not included.",
     categories: [
       { id: "websites", title: "Websites", intro: "Present your business, build trust and turn visitors into enquiries.", packages: [

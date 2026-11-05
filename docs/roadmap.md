@@ -15,16 +15,16 @@
 - [x] Navigation responsive
 - [x] Accueil immersif initial et animations accessibles
 - [x] Sections expertises, concepts portfolio, références et processus
-- [ ] Pages détaillées par expertise
+- [x] Pages détaillées par expertise en français et en anglais
 - [x] Accueil et navigation disponibles en français et en anglais (base d'internationalisation)
-- [ ] Internationalisation complète de toutes les pages et métadonnées localisées
-- [ ] Formulaire de contact fonctionnel
+- [ ] Internationalisation complète des métadonnées HTML et des pages restantes
+- [x] Formulaire de contact bilingue avec validation serveur et envoi Resend (configuration requise)
 - [ ] SEO technique complet, métadonnées sociales et données structurées
 - [ ] Vérification accessibilité et responsive sur appareils réels
 
 ## Phase 2 — Catalogue et acquisition
 - [ ] Catalogue de prestations
-- [ ] Formulaire de brief et demande de devis
+- [ ] Formulaire de brief et demande de devis détaillé
 - [ ] Gestion des demandes entrantes
 - [ ] E-mails transactionnels
 

@@ -28,7 +28,7 @@
 - [ ] Tests d'intégration DB et tests de sécurité
 
 ## Phase 3 — Devis, commandes et paiements
-- [ ] Création de devis depuis un lead
+- [x] Création de devis brouillon depuis un lead dans le back-office
 - [ ] Génération PDF, versionnement et acceptation client
 - [ ] Commandes et acomptes configurables
 - [ ] Stripe Checkout, webhooks signés et idempotents

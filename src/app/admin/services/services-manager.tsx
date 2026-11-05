@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 
 type Service = { id: string; slug: string; nameFr: string; nameEn: string; descriptionFr: string | null; descriptionEn: string | null; active: boolean; sortOrder: number };
 
@@ -10,7 +10,7 @@ export function ServicesManager() {
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
-  async function load() {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch("/api/admin/services", { cache: "no-store" });
@@ -19,16 +19,17 @@ export function ServicesManager() {
       setServices(data.services);
     } catch (e) { setError(e instanceof Error ? e.message : "Erreur de chargement."); }
     finally { setLoading(false); }
-  }
-  useEffect(() => { void load(); }, []);
+  }, []);
+  useEffect(() => { void load(); }, [load]);
 
   async function create(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); setSaving(true); setError("");
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     try {
       const response = await fetch("/api/admin/services", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(form.entries())) });
       if (!response.ok) throw new Error("Création impossible. Vérifiez le slug et les noms.");
-      event.currentTarget.reset();
+      formElement.reset();
       await load();
     } catch (e) { setError(e instanceof Error ? e.message : "Erreur."); }
     finally { setSaving(false); }

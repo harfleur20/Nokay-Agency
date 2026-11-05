@@ -3,58 +3,58 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
 type SiteHeaderProps = { locale?: "fr" | "en"; homeHref?: string };
-type Service = { title: string; description: string; icon: "mark" | "palette" | "users" | "layout" | "monitor" | "code" | "layers" | "cloud" | "search" | "spark" | "target" | "chart" | "megaphone" };
+type Service = { title: string; description: string; href: string; icon: "mark" | "palette" | "users" | "layout" | "monitor" | "code" | "layers" | "cloud" | "search" | "spark" | "target" | "chart" | "megaphone" };
 type Expertise = { id: string; title: string; description: string; services: Service[] };
 
 const expertiseContent: Record<"fr" | "en", Expertise[]> = {
   fr: [
     { id: "design", title: "Design", description: "Une identité forte, une expérience fidèle à votre image.", services: [
-      { title: "Conception de logo", description: "Travailler une image fidèle et unique", icon: "mark" },
-      { title: "Charte graphique", description: "Concevoir une identité visuelle adaptée", icon: "palette" },
-      { title: "Ateliers persona", description: "Mieux comprendre vos publics et leurs usages", icon: "users" },
-      { title: "Audit UI/UX", description: "Challenger l'ergonomie et l'esthétique", icon: "layout" },
-      { title: "Maquette de site", description: "Créer arborescences, wireframes et maquettes", icon: "monitor" },
+      { title: "Conception de logo", description: "Travailler une image fidèle et unique", href: "/expertises/design-communication", icon: "mark" },
+      { title: "Charte graphique", description: "Concevoir une identité visuelle adaptée", href: "/expertises/design-communication", icon: "palette" },
+      { title: "Ateliers persona", description: "Mieux comprendre vos publics et leurs usages", href: "/expertises/design-communication", icon: "users" },
+      { title: "Audit UI/UX", description: "Challenger l'ergonomie et l'esthétique", href: "/expertises/design-communication", icon: "layout" },
+      { title: "Maquette de site", description: "Créer arborescences, wireframes et maquettes", href: "/expertises/design-communication", icon: "monitor" },
     ]},
     { id: "developpement", title: "Développement", description: "Des produits digitaux conçus pour prendre vie et évoluer.", services: [
-      { title: "Site vitrine", description: "Présenter votre activité avec impact", icon: "monitor" },
-      { title: "Application web", description: "Créer des outils adaptés à vos usages", icon: "code" },
-      { title: "Développement sur mesure", description: "Construire les fonctionnalités de votre projet", icon: "layers" },
-      { title: "SaaS", description: "Transformer votre idée en produit évolutif", icon: "cloud" },
+      { title: "Site vitrine", description: "Présenter votre activité avec impact", href: "/expertises/sites-vitrines", icon: "monitor" },
+      { title: "Application web", description: "Créer des outils adaptés à vos usages", href: "/expertises/applications-web", icon: "code" },
+      { title: "Développement sur mesure", description: "Construire les fonctionnalités de votre projet", href: "/expertises/applications-web", icon: "layers" },
+      { title: "SaaS", description: "Transformer votre idée en produit évolutif", href: "/expertises/saas", icon: "cloud" },
     ]},
     { id: "seo-geo", title: "SEO / GEO", description: "Améliorer votre visibilité sur les moteurs de recherche et les IA.", services: [
-      { title: "Référencement naturel", description: "Développer votre visibilité sur Google", icon: "search" },
-      { title: "Optimisation GEO", description: "Préparer votre présence dans les réponses des IA", icon: "spark" },
-      { title: "Audit & stratégie", description: "Identifier les leviers de progression", icon: "chart" },
+      { title: "Référencement naturel", description: "Développer votre visibilité sur Google", href: "/expertises/seo-geo", icon: "search" },
+      { title: "Optimisation GEO", description: "Préparer votre présence dans les réponses des IA", href: "/expertises/seo-geo", icon: "spark" },
+      { title: "Audit & stratégie", description: "Identifier les leviers de progression", href: "/expertises/seo-geo", icon: "chart" },
     ]},
     { id: "ads", title: "ADS", description: "Attirer les bonnes audiences et développer votre acquisition.", services: [
-      { title: "Publicité en ligne", description: "Lancer des campagnes ciblées", icon: "megaphone" },
-      { title: "Stratégie d'acquisition", description: "Toucher les audiences qui comptent", icon: "target" },
-      { title: "Suivi des performances", description: "Mesurer et optimiser vos campagnes", icon: "chart" },
+      { title: "Publicité en ligne", description: "Lancer des campagnes ciblées", href: "/expertises/publicite-en-ligne", icon: "megaphone" },
+      { title: "Stratégie d'acquisition", description: "Toucher les audiences qui comptent", href: "/expertises/publicite-en-ligne", icon: "target" },
+      { title: "Suivi des performances", description: "Mesurer et optimiser vos campagnes", href: "/expertises/publicite-en-ligne", icon: "chart" },
     ]},
   ],
   en: [
     { id: "design", title: "Design", description: "A distinctive identity and an experience that feels like you.", services: [
-      { title: "Logo design", description: "Build a distinctive and authentic image", icon: "mark" },
-      { title: "Visual identity", description: "Create a visual system made for your brand", icon: "palette" },
-      { title: "Persona workshops", description: "Understand your audiences and their needs", icon: "users" },
-      { title: "UI/UX audit", description: "Challenge usability and visual design", icon: "layout" },
-      { title: "Website mockups", description: "Create sitemaps, wireframes and mockups", icon: "monitor" },
+      { title: "Logo design", description: "Build a distinctive and authentic image", href: "/en/expertise/design-communication", icon: "mark" },
+      { title: "Visual identity", description: "Create a visual system made for your brand", href: "/en/expertise/design-communication", icon: "palette" },
+      { title: "Persona workshops", description: "Understand your audiences and their needs", href: "/en/expertise/design-communication", icon: "users" },
+      { title: "UI/UX audit", description: "Challenge usability and visual design", href: "/en/expertise/design-communication", icon: "layout" },
+      { title: "Website mockups", description: "Create sitemaps, wireframes and mockups", href: "/en/expertise/design-communication", icon: "monitor" },
     ]},
     { id: "development", title: "Development", description: "Digital products built to launch, grow and evolve.", services: [
-      { title: "Showcase website", description: "Present your business with impact", icon: "monitor" },
-      { title: "Web application", description: "Build tools tailored to your workflows", icon: "code" },
-      { title: "Custom development", description: "Create the features your project needs", icon: "layers" },
-      { title: "SaaS", description: "Turn your idea into a scalable product", icon: "cloud" },
+      { title: "Showcase website", description: "Present your business with impact", href: "/en/expertise/websites", icon: "monitor" },
+      { title: "Web application", description: "Build tools tailored to your workflows", href: "/en/expertise/web-applications", icon: "code" },
+      { title: "Custom development", description: "Create the features your project needs", href: "/en/expertise/web-applications", icon: "layers" },
+      { title: "SaaS", description: "Turn your idea into a scalable product", href: "/expertises/saas", icon: "cloud" },
     ]},
     { id: "seo-geo", title: "SEO / GEO", description: "Grow your visibility across search engines and AI.", services: [
-      { title: "Organic search", description: "Improve your visibility on Google", icon: "search" },
-      { title: "GEO optimisation", description: "Build your presence in AI-generated answers", icon: "spark" },
+      { title: "Organic search", description: "Improve your visibility on Google", href: "/en/expertise/seo-geo", icon: "search" },
+      { title: "GEO optimisation", description: "Build your presence in AI-generated answers", href: "/en/expertise/seo-geo", icon: "spark" },
       { title: "Audit & strategy", description: "Find the right opportunities to grow", icon: "chart" },
     ]},
     { id: "ads", title: "ADS", description: "Reach the right audiences and grow acquisition.", services: [
-      { title: "Online advertising", description: "Launch targeted advertising campaigns", icon: "megaphone" },
-      { title: "Acquisition strategy", description: "Reach the audiences that matter", icon: "target" },
-      { title: "Performance tracking", description: "Measure and optimise your campaigns", icon: "chart" },
+      { title: "Online advertising", description: "Launch targeted advertising campaigns", href: "/en/expertise/online-advertising", icon: "megaphone" },
+      { title: "Acquisition strategy", description: "Reach the audiences that matter", href: "/en/expertise/online-advertising", icon: "target" },
+      { title: "Performance tracking", description: "Measure and optimise your campaigns", href: "/en/expertise/online-advertising", icon: "chart" },
     ]},
   ],
 };
@@ -142,7 +142,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
               <div className="expertise-mega__details" role="tabpanel">
                 <div className="expertise-mega__services">
                   {active.services.map((service, index) => (
-                    <a key={service.title} className="expertise-mega__service" href={sectionHref("#expertises")} onClick={closeMenus} style={{ "--service-index": index } as CSSProperties}>
+                    <a key={service.title} className="expertise-mega__service" href={service.href} onClick={closeMenus} style={{ "--service-index": index } as CSSProperties}>
                       <span className="expertise-mega__service-icon"><ServiceIcon kind={service.icon}/></span>
                       <span className="expertise-mega__service-copy"><strong>{service.title}</strong><small>{service.description}</small></span>
                       <span className="expertise-mega__service-arrow" aria-hidden="true">↗</span>
@@ -178,7 +178,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
                   <strong>{category.title}</strong><span>{activeCategory === category.id ? "−" : "+"}</span>
                 </button>
                 {activeCategory === category.id && <div className="mobile-expertise__services">
-                  {category.services.map((service) => <a key={service.title} href={sectionHref("#expertises")} onClick={closeMenus}>{service.title}<span>↗</span></a>)}
+                  {category.services.map((service) => <a key={service.title} href={service.href} onClick={closeMenus}>{service.title}<span>↗</span></a>)}
                 </div>}
               </div>
             ))}

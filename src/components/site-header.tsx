@@ -2,39 +2,55 @@
 
 import { useState } from "react";
 
-const links = [
-  { href: "#expertises", label: "Expertises" },
-  { href: "#realisations", label: "Réalisations" },
-  { href: "#processus", label: "Notre méthode" },
-  { href: "#contact", label: "Contact" },
-];
+type SiteHeaderProps = { locale?: "fr" | "en" };
 
-export function SiteHeader() {
+const navigation = {
+  fr: [
+    { href: "#expertises", label: "Expertises" },
+    { href: "#realisations", label: "Réalisations" },
+    { href: "#processus", label: "Notre méthode" },
+    { href: "#contact", label: "Contact" },
+  ],
+  en: [
+    { href: "#expertises", label: "Expertise" },
+    { href: "#realisations", label: "Selected work" },
+    { href: "#processus", label: "Our process" },
+    { href: "#contact", label: "Contact" },
+  ],
+};
+
+export function SiteHeader({ locale = "fr" }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
+  const links = navigation[locale];
+  const isEnglish = locale === "en";
 
   return (
     <header className="site-header">
       <div className="site-header__inner">
-        <a href="#" className="brand" aria-label="NOKAY, accueil">NOKAY<span>.</span></a>
-        <nav className="desktop-nav" aria-label="Navigation principale">
+        <a href={isEnglish ? "/en" : "/"} className="brand" aria-label="NOKAY, home">NOKAY<span>.</span></a>
+        <nav className="desktop-nav" aria-label={isEnglish ? "Main navigation" : "Navigation principale"}>
           {links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
         </nav>
-        <a className="header-cta" href="#contact">Parlons de votre projet <span aria-hidden="true">↗</span></a>
-        <button
-          type="button"
-          className="menu-toggle"
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span /><span />
-        </button>
+        <div className="header-actions">
+          <a className="language-switch" href={isEnglish ? "/" : "/en"} lang={isEnglish ? "fr" : "en"}>{isEnglish ? "FR" : "EN"}</a>
+          <a className="header-cta" href="#contact">{isEnglish ? "Let's talk about your project" : "Parlons de votre projet"} <span aria-hidden="true">↗</span></a>
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-label={open ? (isEnglish ? "Close menu" : "Fermer le menu") : (isEnglish ? "Open menu" : "Ouvrir le menu")}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span /><span />
+          </button>
+        </div>
       </div>
-      <nav id="mobile-navigation" className={`mobile-nav ${open ? "is-open" : ""}`} aria-label="Navigation mobile">
+      <nav id="mobile-navigation" className={`mobile-nav ${open ? "is-open" : ""}`} aria-label={isEnglish ? "Mobile navigation" : "Navigation mobile"}>
         {links.map((link) => (
           <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}<span>↗</span></a>
         ))}
+        <a href={isEnglish ? "/" : "/en"} onClick={() => setOpen(false)}>{isEnglish ? "Français" : "English"}<span>↗</span></a>
       </nav>
     </header>
   );

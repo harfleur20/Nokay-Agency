@@ -23,6 +23,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const links = navigation[locale];
   const isEnglish = locale === "en";
+  const sectionHref = (hash: string) => homeHref ? `${homeHref}${hash}` : hash;
 
   return (
     <header className="site-header">
@@ -33,7 +34,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
         </nav>
         <div className="header-actions">
           <a className="language-switch" href={isEnglish ? "/" : "/en"} lang={isEnglish ? "fr" : "en"}>{isEnglish ? "FR" : "EN"}</a>
-          <a className="header-cta" href="#contact">{isEnglish ? "Let's talk about your project" : "Parlons de votre projet"} <span aria-hidden="true">↗</span></a>
+          <a className="header-cta" href={sectionHref("#contact")}>{isEnglish ? "Let's talk about your project" : "Parlons de votre projet"} <span aria-hidden="true">↗</span></a>
           <button
             type="button"
             className="menu-toggle"
@@ -48,7 +49,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
       </div>
       <nav id="mobile-navigation" className={`mobile-nav ${open ? "is-open" : ""}`} aria-label={isEnglish ? "Mobile navigation" : "Navigation mobile"}>
         {links.map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.label}<span>↗</span></a>
+          <a key={link.href} href={sectionHref(link.href)} onClick={() => setOpen(false)}>{link.label}<span>↗</span></a>
         ))}
         <a href={isEnglish ? "/" : "/en"} onClick={() => setOpen(false)}>{isEnglish ? "Français" : "English"}<span>↗</span></a>
       </nav>

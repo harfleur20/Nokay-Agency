@@ -1,62 +1,74 @@
+import { SiteHeader } from "@/components/site-header";
+import { Reveal } from "@/components/reveal";
+
 const services = [
-  { number: "01", title: "Sites web", description: "Des sites vitrines singuliers, rapides et pensés pour transformer vos visiteurs en clients." },
-  { number: "02", title: "Applications web", description: "Des outils métier et expériences interactives conçus autour de vos usages." },
-  { number: "03", title: "SaaS", description: "Des produits numériques robustes, évolutifs et prêts à grandir avec vos ambitions." },
-  { number: "04", title: "Design & communication", description: "Identités visuelles, UI/UX, motion design et supports qui donnent du caractère à vos idées." },
+  { number: "01", title: "Sites vitrines", tag: "Visibilité & conversion", description: "Des sites singuliers qui racontent votre histoire, valorisent votre expertise et transforment l’attention en opportunités." },
+  { number: "02", title: "Applications web", tag: "Outils & expériences", description: "Des plateformes et outils métier pensés autour de vos utilisateurs, de vos processus et de vos objectifs." },
+  { number: "03", title: "Produits SaaS", tag: "Du produit à l’échelle", description: "Nous concevons des expériences logicielles utiles, intuitives et capables d’évoluer avec votre activité." },
+  { number: "04", title: "Design & communication", tag: "Identité & expression", description: "Identité visuelle, UI/UX, design graphique et motion design pour donner une personnalité cohérente à vos idées." },
+];
+
+const concepts = [
+  { number: "01", type: "Concept e-commerce", title: "MONOCHROME", description: "Une direction artistique éditoriale pour une marque lifestyle.", tone: "project-card--lime", mark: "M." },
+  { number: "02", type: "Concept SaaS", title: "NEXORA", description: "Un tableau de bord produit centré sur la clarté des données.", tone: "project-card--violet", mark: "N/" },
+  { number: "03", type: "Concept identité", title: "FORME STUDIO", description: "Un univers graphique modulaire pour une marque créative.", tone: "project-card--orange", mark: "F." },
+];
+
+const steps = [
+  ["01", "Découverte", "Nous échangeons sur votre activité, vos utilisateurs, vos enjeux et vos objectifs."],
+  ["02", "Stratégie & conception", "Nous cadrons le besoin, définissons le périmètre et dessinons la solution."],
+  ["03", "Design & prototypage", "Nous donnons forme à l’expérience avec des interfaces et prototypes à valider."],
+  ["04", "Développement", "Nous construisons le produit avec une attention particulière à la qualité et aux performances."],
+  ["05", "Tests & validation", "Nous vérifions les parcours, les contenus, l’affichage et les fonctionnalités."],
+  ["06", "Livraison & accompagnement", "Nous préparons la mise en ligne et vous accompagnons dans la prise en main."],
 ];
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-hidden">
-      <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-7 lg:px-10">
-        <a href="#" aria-label="NOKAY, accueil" className="text-2xl font-black tracking-[-0.08em]">NOKAY<span className="text-accent">.</span></a>
-        <nav aria-label="Navigation principale" className="hidden items-center gap-8 text-sm text-muted md:flex">
-          <a className="transition hover:text-foreground" href="#expertises">Expertises</a>
-          <a className="transition hover:text-foreground" href="#approche">Notre approche</a>
-          <a className="transition hover:text-foreground" href="#contact">Contact</a>
-        </nav>
-        <a href="#contact" className="rounded-full border border-white/20 px-5 py-2.5 text-sm transition hover:border-accent hover:text-accent">Parlons de votre projet <span aria-hidden="true">↗</span></a>
-      </header>
+    <main id="top">
+      <SiteHeader />
 
-      <section className="mx-auto flex min-h-[76vh] max-w-7xl flex-col justify-center px-6 py-24 lg:px-10">
-        <p className="mb-8 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-accent"><span className="h-px w-8 bg-accent" /> Agence digitale créative & technologique</p>
-        <h1 className="max-w-5xl text-6xl font-semibold leading-[0.98] tracking-[-0.07em] sm:text-7xl lg:text-[clamp(5rem,10vw,9.5rem)]">
-          Des idées fortes.<br /><span className="text-accent">Des expériences</span><br />qui comptent.
-        </h1>
-        <div className="mt-12 flex flex-col justify-between gap-8 border-t border-white/15 pt-7 sm:flex-row sm:items-end">
-          <p className="max-w-md text-base leading-7 text-muted">Nous imaginons et construisons des expériences digitales qui donnent vie aux ambitions des marques et des entreprises.</p>
-          <a href="#expertises" className="group inline-flex items-center gap-4 text-sm font-semibold">Explorer nos expertises<span className="grid h-11 w-11 place-items-center rounded-full bg-accent text-lg text-background transition group-hover:rotate-45">↘</span></a>
+      <section className="hero section-shell">
+        <div className="hero__orb hero__orb--one" aria-hidden="true" />
+        <div className="hero__orb hero__orb--two" aria-hidden="true" />
+        <div className="hero__content">
+          <Reveal><p className="eyebrow"><span className="eyebrow__line" /> Agence digitale créative & technologique</p></Reveal>
+          <Reveal delay={0.08}><h1>Ideas into<br /><span>digital</span> experiences<span className="hero__period">.</span></h1></Reveal>
+          <Reveal delay={0.16}>
+            <div className="hero__bottom">
+              <p>Nous transformons les idées ambitieuses en expériences digitales utiles, désirables et mémorables.</p>
+              <a className="round-link" href="#expertises" aria-label="Découvrir nos expertises">↓</a>
+            </div>
+          </Reveal>
         </div>
+        <div className="hero__index" aria-hidden="true"><span>01 / 04</span><span>SCROLL TO EXPLORE</span></div>
       </section>
 
-      <section id="expertises" className="border-t border-white/10 bg-[#15161a] px-6 py-24 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-14 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div><p className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-accent">Ce que nous faisons</p><h2 className="text-4xl font-semibold tracking-[-0.05em] sm:text-6xl">Le digital, sans limites.</h2></div>
-            <p className="max-w-sm text-sm leading-6 text-muted">De la première idée au produit final, nous réunissons créativité, stratégie et technologie.</p>
-          </div>
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 md:grid-cols-2">
-            {services.map((service) => (
-              <article key={service.number} className="bg-[#15161a] p-8 transition-colors hover:bg-[#1c1e23] sm:p-10">
-                <p className="mb-14 text-sm text-accent">{service.number}</p><h3 className="mb-4 text-2xl font-semibold tracking-tight">{service.title}</h3><p className="max-w-md text-sm leading-6 text-muted">{service.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
+      <section className="intro-band"><div className="section-shell intro-band__inner"><p>La créativité ouvre la voie.<br /><span>La technologie lui donne vie.</span></p><span className="intro-band__asterisk" aria-hidden="true">✳</span></div></section>
+
+      <section id="expertises" className="section section-shell">
+        <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> Nos expertises</p><h2>Des idées.<br /><span>Du concret.</span></h2></div><p className="section-heading__aside">Nous réunissons stratégie, design et développement pour créer des solutions digitales qui servent vos ambitions.</p></div></Reveal>
+        <div className="service-list">{services.map((service) => <Reveal key={service.number}><article className="service-row"><span className="service-row__number">{service.number}</span><div className="service-row__main"><h3>{service.title}</h3><p>{service.description}</p></div><span className="service-row__tag">{service.tag}</span><span className="service-row__arrow" aria-hidden="true">↗</span></article></Reveal>)}</div>
       </section>
 
-      <section id="approche" className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-accent">Notre approche</p>
-        <h2 className="max-w-4xl text-4xl font-semibold leading-tight tracking-[-0.05em] sm:text-6xl">Comprendre. Imaginer. Construire. Faire évoluer.</h2>
-        <p className="mt-7 max-w-xl text-base leading-7 text-muted">Chaque projet commence par l’écoute et se construit avec méthode, transparence et exigence.</p>
-      </section>
+      <section id="realisations" className="section projects-section"><div className="section-shell">
+        <Reveal><div className="section-heading section-heading--light"><div><p className="eyebrow"><span className="eyebrow__line" /> Sélection créative</p><h2>Explorer<br /><span>les possibles.</span></h2></div><p className="section-heading__aside">Quelques directions créatives illustrant notre approche. Ces visuels sont des concepts de démonstration, pas des références clients.</p></div></Reveal>
+        <div className="project-grid">{concepts.map((project) => <Reveal key={project.number}><article className={`project-card ${project.tone}`}><div className="project-card__visual"><span className="project-card__mark">{project.mark}</span><span className="project-card__index">{project.number}</span><span className="project-card__orbit" /></div><div className="project-card__meta"><span>{project.type}</span><span>Concept créatif</span></div><h3>{project.title}</h3><p>{project.description}</p></article></Reveal>)}</div>
+      </div></section>
 
-      <footer id="contact" className="border-t border-white/10 px-6 py-12 lg:px-10">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 sm:flex-row sm:items-end">
-          <div><p className="text-3xl font-black tracking-[-0.08em]">NOKAY<span className="text-accent">.</span></p><p className="mt-3 text-sm text-muted">Ideas into digital experiences.</p></div>
-          <a href="#expertises" className="text-sm text-muted transition hover:text-accent">Découvrir nos expertises ↗</a>
-        </div>
-      </footer>
+      <section className="trust-section section-shell"><Reveal><div className="trust-section__copy"><p className="eyebrow"><span className="eyebrow__line" /> La confiance, avant tout</p><h2>Les belles collaborations commencent par <span>une rencontre.</span></h2></div><div className="trust-section__note"><span className="trust-section__symbol">✳</span><p>Nous présenterons ici nos clients et partenaires avec leur accord. Chaque collaboration mérite d’être racontée avec justesse.</p></div></Reveal></section>
+
+      <section id="processus" className="section process-section"><div className="section-shell">
+        <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> Notre processus</p><h2>De l’idée<br /><span>à l’impact.</span></h2></div><p className="section-heading__aside">Un cadre clair, des échanges réguliers et une progression visible à chaque étape.</p></div></Reveal>
+        <div className="process-grid">{steps.map(([number, title, description]) => <Reveal key={number}><article className="process-card"><span>{number}</span><h3>{title}</h3><p>{description}</p></article></Reveal>)}</div>
+      </div></section>
+
+      <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Et si on construisait la suite ?</p><h2>Votre prochaine<br />idée mérite <span>mieux.</span></h2><a href="#contact" className="manifesto__link">Parlons de votre projet <span>↗</span></a></div></section>
+
+      <footer id="contact" className="site-footer"><div className="section-shell">
+        <div className="site-footer__top"><a href="#top" className="brand brand--footer">NOKAY<span>.</span></a><p>Ideas into digital experiences.</p><a className="footer-contact" href="#expertises">Découvrir nos expertises ↗</a></div>
+        <div className="site-footer__bottom"><span>© {new Date().getFullYear()} NOKAY. Tous droits réservés.</span><span>Créativité · Technologie · Expérience</span><a href="#top">Retour en haut ↑</a></div>
+      </div></footer>
     </main>
   );
 }

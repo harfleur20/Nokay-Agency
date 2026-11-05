@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -27,7 +28,7 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 
 .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(245,245,242,.08); background: rgba(16,17,20,.82); backdrop-filter: blur(18px); }
 .site-header__inner { width: min(1440px, calc(100% - 64px)); height: 82px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-.brand { font-size: 27px; font-weight: 950; letter-spacing: -.09em; }
+.brand { font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive; font-size: 43px; font-weight: 700; letter-spacing: -.025em; line-height: .85; }
 .brand span { color: var(--accent); }
 .desktop-nav { display: flex; align-items: center; gap: clamp(22px, 3vw, 48px); margin-left: auto; margin-right: 28px; }
 .desktop-nav a, .header-cta { font-size: 12px; font-weight: 600; transition: color .2s ease, border-color .2s ease; }
@@ -624,3 +625,12 @@ section[id], footer[id] { scroll-margin-top: 88px; }
   .editorial-accordion__content { padding: 0 6px 26px 2px; }
   .editorial-accordion__description { font-size: 15px; }
 }
+
+
+/* Osez. brand and simplified editorial labels */
+.brand { font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive; font-size: 43px; font-weight: 700; letter-spacing: -.025em; line-height: .85; }
+.brand span { color: var(--accent); }
+.eyebrow__line { display: none !important; }
+.price-card__cta { justify-content: center; padding: 19px 18px; font-size: 16px; font-weight: 750; text-align: center; }
+.price-card__cta span { display: none; }
+.brand--footer { font-size: 48px; }

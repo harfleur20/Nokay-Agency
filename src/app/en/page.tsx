@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Digital agency for web, software & brand experiences",
@@ -32,7 +33,11 @@ const steps = [
   ["06", "Delivery & support", "We prepare the launch and help you take ownership of your solution."],
 ];
 
-export default function EnglishHome() {
+export default async function EnglishHome() {
+  let portfolioItems: Awaited<ReturnType<typeof prisma.portfolioItem.findMany>> = [];
+  try { portfolioItems = await prisma.portfolioItem.findMany({ where: { published: true }, orderBy: { createdAt: "desc" }, take: 6 }); }
+  catch (error) { console.error("NOKAY portfolio could not be loaded", error); }
+  const projects = portfolioItems.length ? portfolioItems.map((item, index) => ({ number: String(index + 1).padStart(2, "0"), type: item.category, title: item.title, description: item.summary, tone: ["project-card--lime", "project-card--violet", "project-card--orange"][index % 3], mark: `${item.title.slice(0, 1).toUpperCase()}.`, isConcept: item.isConcept, imageUrl: item.imageUrl, projectUrl: item.projectUrl })) : concepts.map((item) => ({ ...item, isConcept: true, imageUrl: null, projectUrl: null }));
   return (
     <main id="top" lang="en">
       <SiteHeader locale="en" />
@@ -56,7 +61,7 @@ export default function EnglishHome() {
 
       <section id="realisations" className="section projects-section"><div className="section-shell">
         <Reveal><div className="section-heading section-heading--light"><div><p className="eyebrow"><span className="eyebrow__line" /> Selected work</p><h2>Explore<br /><span>the possible.</span></h2></div><p className="section-heading__aside">A few creative directions that illustrate our approach. These are demonstration concepts, not client case studies.</p></div></Reveal>
-        <div className="project-grid">{concepts.map((project) => <Reveal key={project.number}><article className={`project-card ${project.tone}`}><div className="project-card__visual"><span className="project-card__mark">{project.mark}</span><span className="project-card__index">{project.number}</span><span className="project-card__orbit" /></div><div className="project-card__meta"><span>{project.type}</span><span>Creative concept</span></div><h3>{project.title}</h3><p>{project.description}</p></article></Reveal>)}</div>
+        <div className="project-grid">{projects.map((project) => <Reveal key={project.number}><article className={`project-card ${project.tone}`}><div className="project-card__visual" style={project.imageUrl ? { backgroundImage: `linear-gradient(rgba(16,17,20,.2),rgba(16,17,20,.55)),url("${project.imageUrl}")`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}><span className="project-card__mark">{project.mark}</span><span className="project-card__index">{project.number}</span><span className="project-card__orbit" /></div><div className="project-card__meta"><span>{project.type}</span><span>{project.isConcept ? "Creative concept" : "Published project"}</span></div><h3>{project.title}</h3><p>{project.description}</p>{project.projectUrl && <a className="portfolio-project-link" href={project.projectUrl} target="_blank" rel="noreferrer">View project ↗</a>}</article></Reveal>)}</div>
       </div></section>
 
       <section className="trust-section section-shell"><Reveal><div className="trust-section__copy"><p className="eyebrow"><span className="eyebrow__line" /> Built on trust</p><h2>Great collaborations start with <span>a conversation.</span></h2></div><div className="trust-section__note"><span className="trust-section__symbol">✳</span><p>We will feature clients and partners here with their permission. Every collaboration deserves to be represented with honesty.</p></div></Reveal></section>

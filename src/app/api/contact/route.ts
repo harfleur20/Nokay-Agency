@@ -42,7 +42,7 @@ export async function POST(request: Request) {
   }
 
   // Persist the enquiry first: email delivery is a notification, not the source of truth.
-  let lead;
+  let lead: { id: string; createdAt: Date };
   try {
     lead = await prisma.lead.create({
       data: { name, email, company: company || null, service, budget, message, source: "website" },

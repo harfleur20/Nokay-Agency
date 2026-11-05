@@ -19,9 +19,8 @@ export async function POST(request: Request) {
     if (!invite || invite.usedAt || invite.expiresAt <= new Date()) return NextResponse.json({ error: "invite_invalid_or_expired" }, { status: 400 });
     const passwordHash = await hash(password, 12);
     const user = await prisma.$transaction(async (tx) => {
-      const current = await tx.accountInvite.findUnique({ where: { id: invite.id } });
-      if (!current || current.usedAt || current.expiresAt <= new Date()) throw new Error("INVITE_ALREADY_USED");
-      await tx.accountInvite.update({ where: { id: invite.id }, data: { usedAt: new Date() } });
+      const claimed = await tx.accountInvite.updateMany({ where: { id: invite.id, usedAt: null, expiresAt: { gt: new Date() } }, data: { usedAt: new Date() } });
+      if (claimed.count !== 1) throw new Error("INVITE_ALREADY_USED");
       return tx.user.update({ where: { id: invite.userId }, data: { passwordHash, active: true } });
     });
     await createSession({ id:user.id, role:user.role, name:user.name, email:user.email });

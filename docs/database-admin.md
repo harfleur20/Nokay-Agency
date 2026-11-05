@@ -22,6 +22,7 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Les statuts sont modifiables et chaque changement écrit une entrée dans `AuditLog`.
 - Le catalogue interne des prestations permet la création et l’activation/désactivation.
 - Les brouillons de devis peuvent être créés à partir d’un lead ; le récapitulatif peut être envoyé au client via Resend. Les PDF et signatures électroniques restent à développer.
+- Les projets peuvent être créés pour un contact client, suivre une étape et une progression, et recevoir des actualités dont la visibilité client est paramétrable. Le portail client et son authentification restent à construire.
 - Le cookie de session est HTTP-only, SameSite=Lax et Secure en production.
 - Le rôle et l'état actif sont revérifiés en base pour chaque accès protégé.
 

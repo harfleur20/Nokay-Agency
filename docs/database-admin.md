@@ -67,3 +67,9 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Le lien de réinitialisation expire après une heure, le token est stocké sous forme de hash et ne peut être consommé qu'une fois.
 - La page `/account/reset-password` impose un mot de passe d'au moins 12 caractères.
 - Les parcours d'activation et de réinitialisation sont protégés par une limitation de débit.
+
+
+## Historique des migrations
+- La migration initiale crée les tables métier de base et le limiteur de débit.
+- Les évolutions ultérieures sont ajoutées dans des dossiers de migration distincts : invitations client, session Checkout Stripe et tokens de réinitialisation.
+- Ne jamais modifier une migration déjà appliquée sur un environnement partagé ; ajouter une nouvelle migration pour chaque changement de schéma.

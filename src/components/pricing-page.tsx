@@ -6,7 +6,7 @@ import { pricing, type Locale } from "@/lib/pricing";
 export function PricingPage({ locale }: { locale: Locale }) {
   const t = pricing[locale];
   const en = locale === "en";
-  return <main id="top">
+  return <main id="top" lang={locale}>
     <SiteHeader locale={locale} homeHref={en ? "/en" : "/"} />
     <section className="pricing-hero section-shell">
       <Reveal><p className="eyebrow"><span className="eyebrow__line" /> {t.eyebrow}</p></Reveal>

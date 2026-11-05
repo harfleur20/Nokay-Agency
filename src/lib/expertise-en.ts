@@ -39,5 +39,25 @@ export const expertiseEn = {
     process: "We explore creative directions based on your positioning. The selected route is developed into a coherent, documented system and adapted to your needs.",
     cta: "Let's shape your identity",
   },
+  "seo-geo": {
+    title: "SEO / GEO",
+    eyebrow: "Visibility & discovery",
+    intro: "Make your business easier to find, understand and recommend across search engines and AI-generated answers.",
+    description: "We strengthen the foundations of your organic visibility: site structure, content, performance and presence across emerging search journeys. A clear strategy designed to attract qualified audiences over time.",
+    outcomes: ["A clearer understanding of your offer by search engines", "Useful content aligned with search intent", "A healthy and accessible technical foundation", "Visibility prepared for AI-powered discovery"],
+    deliverables: ["Technical and content SEO audit", "Keyword and search-intent research", "Page and metadata optimisation", "Content and structured-data improvements", "GEO and AI visibility recommendations", "Performance tracking and improvement plan"],
+    process: "We review your current visibility and goals, identify technical and editorial priorities, implement improvements and monitor results to refine the strategy.",
+    cta: "Grow your visibility",
+  },
+  "online-advertising": {
+    title: "Online advertising",
+    eyebrow: "Acquisition & performance",
+    intro: "Put your offer in front of the right people with advertising campaigns built around your business goals.",
+    description: "From acquisition strategy to campaign optimisation, we help you build a consistent paid presence, manage investment carefully and turn attention into opportunities.",
+    outcomes: ["Campaigns aligned with your goals", "Better-targeted audiences and messages", "A budget managed with purpose", "Performance measured and continuously improved"],
+    deliverables: ["Goal and KPI definition", "Channel and audience selection", "Ad creative and messaging", "Campaign setup and launch", "Conversion and performance tracking", "Optimisation and recommendations"],
+    process: "We define goals and priority audiences, prepare the messaging and campaigns, then use performance data to improve results over time.",
+    cta: "Plan your campaigns",
+  },
 } as const;
 export type ExpertiseEnSlug = keyof typeof expertiseEn;

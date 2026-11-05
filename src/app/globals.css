@@ -674,3 +674,20 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 @media (prefers-reduced-motion: reduce) {
   .hero__video { display: none; }
 }
+
+
+/* Full-bleed hero video: keep the media edge-to-edge, align copy to the site grid */
+.hero.section-shell { width: 100%; max-width: none; }
+.hero__content {
+  width: min(1320px, calc(100% - 64px));
+  margin-inline: auto;
+}
+.hero__index { right: max(32px, calc((100vw - 1320px) / 2)); }
+@media (max-width: 800px) {
+  .hero__content { width: min(680px, calc(100% - 40px)); }
+  .hero__index { right: 20px; }
+}
+@media (max-width: 520px) {
+  .hero__content { width: calc(100% - 40px); }
+  .hero__index { left: 20px; right: auto; }
+}

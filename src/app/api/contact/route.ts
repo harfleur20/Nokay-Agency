@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 const allowedServices = new Set(["website", "application", "saas", "design", "other"]);
-const allowedBudgets = new Set(["unknown", "lt3", "3-7", "7-15", "gt15"]);
+const allowedBudgets = new Set(["unknown", "lt3", "3-7", "7-15", "15-30", "gt15", "gt30"]);
 
 function clean(value: unknown, max: number) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -45,7 +45,7 @@ export async function POST(request: Request) {
   };
   const budgetLabels: Record<string, string> = {
     unknown: "À définir", lt3: "Moins de 3 000 €", "3-7": "3 000 à 7 000 €",
-    "7-15": "7 000 à 15 000 €", gt15: "Plus de 15 000 €",
+    "7-15": "7 000 à 15 000 €", "15-30": "15 000 à 30 000 €", gt15: "Plus de 15 000 €", gt30: "Plus de 30 000 €",
   };
   const text = [
     "Nouvelle demande reçue depuis le site NOKAY",

@@ -5,7 +5,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
-  title: { default: "Osez. — Studio digital créatif", template: "%s | NOKAY" },
+  title: { default: "Osez. — Studio digital créatif", template: "%s | Osez." },
   description: "Osez. imagine et développe des sites vitrines, applications web, produits SaaS et identités visuelles.",
   applicationName: "Osez.",
   keywords: ["agence digitale", "site vitrine", "application web", "SaaS", "design graphique", "UI UX"],

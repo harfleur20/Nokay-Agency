@@ -67,7 +67,7 @@ export default function EnglishHome() {
       <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Ready to build what's next?</p><h2>Your next idea<br />deserves <span>better.</span></h2><a href="#contact" className="manifesto__link">Let's talk about your project <span>↗</span></a></div></section>
 
       <footer id="contact" className="site-footer"><div className="section-shell">
-        <div className="site-footer__top"><a href="#top" className="brand brand--footer">NOKAY<span>.</span></a><p>Ideas into digital experiences.</p><a className="footer-contact" href="mailto:">Start a conversation ↗</a></div>
+        <div className="site-footer__top"><a href="#top" className="brand brand--footer">NOKAY<span>.</span></a><p>Ideas into digital experiences.</p><a className="footer-contact" href="/#contact">Start a conversation ↗</a></div>
         <div className="site-footer__bottom"><span>© {new Date().getFullYear()} NOKAY. All rights reserved.</span><span>Creativity · Technology · Experience</span><a href="#top">Back to top ↑</a></div>
       </div></footer>
     </main>

@@ -30,7 +30,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
   return (
     <header className="site-header">
       <div className="site-header__inner">
-        <a href={isEnglish ? "/en" : "/"} className="brand" aria-label="NOKAY, home">NOKAY<span>.</span></a>
+        <a href={isEnglish ? "/en" : "/"} className="brand" aria-label="Osez, accueil">Osez<span>.</span></a>
         <nav className="desktop-nav" aria-label={isEnglish ? "Main navigation" : "Navigation principale"}>
           {links.map((link) => <a key={link.href} href={sectionHref(link.href)}>{link.label}</a>)}
         </nav>

@@ -34,3 +34,10 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Activer sauvegardes PostgreSQL chiffrées et tester régulièrement une restauration.
 - Définir la durée de conservation et la procédure d'effacement des demandes conformément au RGPD.
 - Les rôles PROJECT_MANAGER et ADMIN ont actuellement le même accès au tableau des leads ; les permissions fines restent à implémenter.
+
+
+## Espace client initial
+- Le premier envoi d'un devis à un contact crée une invitation d'activation valable 72 heures pour son compte client.
+- Le token d'invitation est stocké sous forme de hash et ne peut être utilisé qu'une seule fois.
+- L'espace `/account` affiche uniquement les projets, actualités visibles, devis et commandes du compte connecté.
+- Les clients ne peuvent pas accéder aux routes `/api/admin/*` ; les endpoints admin revérifient les rôles.

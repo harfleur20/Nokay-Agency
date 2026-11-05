@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description: "NOKAY imagine et développe des sites vitrines, applications web, produits SaaS et identités visuelles.",
   applicationName: "NOKAY",
   keywords: ["agence digitale", "site vitrine", "application web", "SaaS", "design graphique", "UI UX"],
+  alternates: { languages: { fr: "/", en: "/en" } },
   robots: { index: true, follow: true },
 };
 

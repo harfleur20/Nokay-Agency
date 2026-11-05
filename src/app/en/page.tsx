@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
-import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { prisma } from "@/lib/prisma";
+import { EditorialAccordion } from "@/components/editorial-accordion";
 
 export const revalidate = 60;
 
@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const services = [
-  { number: "01", title: "Websites", tag: "Visibility & conversion", description: "Distinctive websites that tell your story, showcase your expertise and turn attention into opportunity." },
-  { number: "02", title: "Web applications", tag: "Tools & experiences", description: "Digital platforms and business tools designed around your users, workflows and goals." },
-  { number: "03", title: "SaaS products", tag: "From product to scale", description: "Useful, intuitive software experiences built to evolve with your business." },
-  { number: "04", title: "Design & communication", tag: "Identity & expression", description: "Visual identity, UI/UX, graphic design and motion design that give your ideas a coherent voice." },
+  { title: "Websites", tag: "Visibility & conversion", description: "Distinctive websites that tell your story, showcase your expertise and turn attention into opportunity.", href: "/en/expertise/websites" },
+  { title: "Web applications", tag: "Tools & experiences", description: "Digital platforms and business tools designed around your users, workflows and goals.", href: "/en/expertise/web-applications" },
+  { title: "SaaS products", tag: "From product to scale", description: "Useful, intuitive software experiences built to evolve with your business.", href: "/en/expertise/saas" },
+  { title: "Design & communication", tag: "Identity & expression", description: "Visual identity, UI/UX, graphic design and motion design that give your ideas a coherent voice.", href: "/en/expertise/design-communication" },
 ];
 
 const concepts = [
@@ -27,12 +27,12 @@ const concepts = [
 ];
 
 const steps = [
-  ["01", "Discovery", "We learn about your business, users, challenges and ambitions."],
-  ["02", "Strategy & planning", "We define the scope, align priorities and shape the right solution."],
-  ["03", "Design & prototyping", "We bring the experience to life through interfaces and prototypes."],
-  ["04", "Development", "We build your product with care for quality, accessibility and performance."],
-  ["05", "Testing & validation", "We test user journeys, content, responsive layouts and features."],
-  ["06", "Delivery & support", "We prepare the launch and help you take ownership of your solution."],
+  { title: "Discovery", description: "We learn about your business, users, challenges and ambitions." },
+  { title: "Strategy & planning", description: "We define the scope, align priorities and shape the right solution." },
+  { title: "Design & prototyping", description: "We bring the experience to life through interfaces and prototypes." },
+  { title: "Development", description: "We build your product with care for quality, accessibility and performance." },
+  { title: "Testing & validation", description: "We test user journeys, content, responsive layouts and features." },
+  { title: "Delivery & support", description: "We prepare the launch and help you take ownership of your solution." },
 ];
 
 export default async function EnglishHome() {
@@ -58,7 +58,7 @@ export default async function EnglishHome() {
 
       <section id="expertises" className="section section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> What we do</p><h2>Big ideas.<br /><span>Made real.</span></h2></div><p className="section-heading__aside">We bring strategy, design and development together to create digital solutions that move your business forward.</p></div></Reveal>
-        <div className="service-list">{services.map((service) => <Reveal key={service.number}><Link href={["/en/expertise/websites","/en/expertise/web-applications","/en/expertise/saas","/en/expertise/design-communication"][Number(service.number)-1]} className="service-row"><span className="service-row__number">{service.number}</span><div className="service-row__main"><h3>{service.title}</h3><p>{service.description}</p></div><span className="service-row__tag">{service.tag}</span><span className="service-row__arrow" aria-hidden="true">↗</span></Link></Reveal>)}</div>
+        <EditorialAccordion items={services} locale="en" className="service-accordion" />
       </section>
 
       <section id="realisations" className="section projects-section"><div className="section-shell">
@@ -70,7 +70,7 @@ export default async function EnglishHome() {
 
       <section id="processus" className="section process-section"><div className="section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> How we work</p><h2>From idea<br /><span>to impact.</span></h2></div><p className="section-heading__aside">A clear framework, regular conversations and visible progress at every stage.</p></div></Reveal>
-        <div className="process-grid">{steps.map(([number, title, description]) => <Reveal key={number}><article className="process-card"><span>{number}</span><h3>{title}</h3><p>{description}</p></article></Reveal>)}</div>
+        <EditorialAccordion items={steps} locale="en" className="process-accordion" />
       </div></section>
 
       <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Ready to build what's next?</p><h2>Your next idea<br />deserves <span>better.</span></h2><a href="#contact" className="manifesto__link">Let's talk about your project <span>↗</span></a></div></section>

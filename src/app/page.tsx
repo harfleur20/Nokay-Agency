@@ -1,16 +1,16 @@
 import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
-import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { prisma } from "@/lib/prisma";
+import { EditorialAccordion } from "@/components/editorial-accordion";
 
 export const revalidate = 60;
 
 const services = [
-  { number: "01", title: "Sites vitrines", tag: "Visibilité & conversion", description: "Des sites singuliers qui racontent votre histoire, valorisent votre expertise et transforment l’attention en opportunités." },
-  { number: "02", title: "Applications web", tag: "Outils & expériences", description: "Des plateformes et outils métier pensés autour de vos utilisateurs, de vos processus et de vos objectifs." },
-  { number: "03", title: "Produits SaaS", tag: "Du produit à l’échelle", description: "Nous concevons des expériences logicielles utiles, intuitives et capables d’évoluer avec votre activité." },
-  { number: "04", title: "Design & communication", tag: "Identité & expression", description: "Identité visuelle, UI/UX, design graphique et motion design pour donner une personnalité cohérente à vos idées." },
+  { title: "Sites vitrines", tag: "Visibilité & conversion", description: "Des sites singuliers qui racontent votre histoire, valorisent votre expertise et transforment l’attention en opportunités.", href: "/expertises/sites-vitrines" },
+  { title: "Applications web", tag: "Outils & expériences", description: "Des plateformes et outils métier pensés autour de vos utilisateurs, de vos processus et de vos objectifs.", href: "/expertises/applications-web" },
+  { title: "Produits SaaS", tag: "Du produit à l’échelle", description: "Nous concevons des expériences logicielles utiles, intuitives et capables d’évoluer avec votre activité.", href: "/expertises/saas" },
+  { title: "Design & communication", tag: "Identité & expression", description: "Identité visuelle, UI/UX, design graphique et motion design pour donner une personnalité cohérente à vos idées.", href: "/expertises/design-communication" },
 ];
 
 const concepts = [
@@ -20,12 +20,12 @@ const concepts = [
 ];
 
 const steps = [
-  ["01", "Découverte", "Nous échangeons sur votre activité, vos utilisateurs, vos enjeux et vos objectifs."],
-  ["02", "Stratégie & conception", "Nous cadrons le besoin, définissons le périmètre et dessinons la solution."],
-  ["03", "Design & prototypage", "Nous donnons forme à l’expérience avec des interfaces et prototypes à valider."],
-  ["04", "Développement", "Nous construisons le produit avec une attention particulière à la qualité et aux performances."],
-  ["05", "Tests & validation", "Nous vérifions les parcours, les contenus, l’affichage et les fonctionnalités."],
-  ["06", "Livraison & accompagnement", "Nous préparons la mise en ligne et vous accompagnons dans la prise en main."],
+  { title: "Découverte", description: "Nous échangeons sur votre activité, vos utilisateurs, vos enjeux et vos objectifs." },
+  { title: "Stratégie & conception", description: "Nous cadrons le besoin, définissons le périmètre et dessinons la solution." },
+  { title: "Design & prototypage", description: "Nous donnons forme à l’expérience avec des interfaces et prototypes à valider." },
+  { title: "Développement", description: "Nous construisons le produit avec une attention particulière à la qualité et aux performances." },
+  { title: "Tests & validation", description: "Nous vérifions les parcours, les contenus, l’affichage et les fonctionnalités." },
+  { title: "Livraison & accompagnement", description: "Nous préparons la mise en ligne et vous accompagnons dans la prise en main." },
 ];
 
 export default async function Home() {
@@ -57,7 +57,7 @@ export default async function Home() {
 
       <section id="expertises" className="section section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> Nos expertises</p><h2>Des idées.<br /><span>Du concret.</span></h2></div><p className="section-heading__aside">Nous réunissons stratégie, design et développement pour créer des solutions digitales qui servent vos ambitions.</p></div></Reveal>
-        <div className="service-list">{services.map((service) => <Reveal key={service.number}><Link href={["/expertises/sites-vitrines","/expertises/applications-web","/expertises/saas","/expertises/design-communication"][Number(service.number)-1]} className="service-row"><span className="service-row__number">{service.number}</span><div className="service-row__main"><h3>{service.title}</h3><p>{service.description}</p></div><span className="service-row__tag">{service.tag}</span><span className="service-row__arrow" aria-hidden="true">↗</span></Link></Reveal>)}</div>
+        <EditorialAccordion items={services} locale="fr" className="service-accordion" />
       </section>
 
       <section id="realisations" className="section projects-section"><div className="section-shell">
@@ -69,7 +69,7 @@ export default async function Home() {
 
       <section id="processus" className="section process-section"><div className="section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> Notre processus</p><h2>De l’idée<br /><span>à l’impact.</span></h2></div><p className="section-heading__aside">Un cadre clair, des échanges réguliers et une progression visible à chaque étape.</p></div></Reveal>
-        <div className="process-grid">{steps.map(([number, title, description]) => <Reveal key={number}><article className="process-card"><span>{number}</span><h3>{title}</h3><p>{description}</p></article></Reveal>)}</div>
+        <EditorialAccordion items={steps} locale="fr" className="process-accordion" />
       </div></section>
 
       <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Et si on construisait la suite ?</p><h2>Votre prochaine<br />idée mérite <span>mieux.</span></h2><a href="#contact" className="manifesto__link">Parlons de votre projet <span>↗</span></a></div></section>

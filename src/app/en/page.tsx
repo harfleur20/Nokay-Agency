@@ -44,6 +44,9 @@ export default async function EnglishHome() {
     <main id="top" lang="en">
       <SiteHeader locale="en" />
       <section className="hero section-shell">
+        <video className="hero__video" autoPlay muted loop playsInline preload="metadata" poster="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=82" aria-hidden="true">
+          <source src="https://videos.pexels.com/video-files/6804109/6804109-uhd_4096_2160_25fps.mp4" type="video/mp4" />
+        </video>
         <div className="hero__content">
           <Reveal><p className="eyebrow"><span className="eyebrow__line" /> Independent digital studio · Creative technology</p></Reveal>
           <Reveal delay={0.08}><h1>Ideas into<br /><span>digital</span> experiences<span className="hero__period">.</span></h1></Reveal>

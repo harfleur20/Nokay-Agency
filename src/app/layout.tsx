@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   },
   description:
     "NOKAY conçoit des expériences digitales : sites web, applications, SaaS et identités visuelles.",
-  metadataBase: new URL("https://nok ay.example".replace(" ", "")),
 };
 
 export default function RootLayout({

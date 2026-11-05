@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/auth";
 import { requireRoles } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma";
 
@@ -8,7 +7,7 @@ function clean(value: unknown, max: number) {
 }
 
 export async function GET() {
-  const admin = await requireAdmin();
+  const admin = await requireRoles(["SUPER_ADMIN", "ADMIN"]);
   if (!admin) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const services = await prisma.service.findMany({ orderBy: [{ sortOrder: "asc" }, { nameFr: "asc" }] });
   return NextResponse.json({ services });

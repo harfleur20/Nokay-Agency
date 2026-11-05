@@ -1,0 +1,210 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  PROJECT_MANAGER
+  CLIENT
+}
+
+enum LeadStatus {
+  NEW
+  QUALIFIED
+  QUOTED
+  WON
+  LOST
+  ARCHIVED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum ProjectStatus {
+  PLANNING
+  DESIGN
+  DEVELOPMENT
+  REVIEW
+  DELIVERED
+  ON_HOLD
+}
+
+model User {
+  id           String      @id @default(cuid())
+  name         String
+  email        String      @unique
+  passwordHash String
+  role         UserRole    @default(CLIENT)
+  active       Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  leads        Lead[]      @relation("LeadOwner")
+  quotes       Quote[]
+  orders       Order[]
+  projects     Project[]
+  auditLogs    AuditLog[]
+}
+
+model Lead {
+  id        String     @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  service   String
+  budget    String
+  message   String    @db.Text
+  status    LeadStatus @default(NEW)
+  source    String    @default("website")
+  ownerId   String?
+  owner     User?      @relation("LeadOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([status, createdAt])
+  @@index([email])
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  nameFr      String
+  nameEn      String
+  descriptionFr String? @db.Text
+  descriptionEn String? @db.Text
+  active      Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Quote {
+  id          String      @id @default(cuid())
+  reference   String      @unique
+  clientId    String
+  client      User        @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  title       String
+  description String?     @db.Text
+  amountCents Int
+  currency    String      @default("EUR")
+  status      QuoteStatus @default(DRAFT)
+  validUntil  DateTime?
+  acceptedAt  DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  order       Order?
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  reference   String      @unique
+  clientId    String
+  client      User        @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  quoteId     String?     @unique
+  quote       Quote?      @relation(fields: [quoteId], references: [id], onDelete: SetNull)
+  title       String
+  amountCents Int
+  depositCents Int?
+  currency    String      @default("EUR")
+  status      OrderStatus @default(PENDING)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  payments    Payment[]
+  projects    Project[]
+}
+
+model Payment {
+  id                     String        @id @default(cuid())
+  orderId                String
+  order                  Order         @relation(fields: [orderId], references: [id], onDelete: Restrict)
+  amountCents            Int
+  currency               String        @default("EUR")
+  status                 PaymentStatus @default(PENDING)
+  provider               String        @default("stripe")
+  providerPaymentIntentId String?      @unique
+  idempotencyKey         String?       @unique
+  paidAt                 DateTime?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  clientId    String
+  client      User          @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  orderId     String?
+  order       Order?        @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  name        String
+  description String?       @db.Text
+  status      ProjectStatus @default(PLANNING)
+  progress    Int           @default(0)
+  startDate   DateTime?
+  dueDate     DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  updates     ProjectUpdate[]
+}
+
+model ProjectUpdate {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title     String
+  body      String   @db.Text
+  visibleToClient Boolean @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([projectId, createdAt])
+}
+
+model PortfolioItem {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  summary     String   @db.Text
+  category    String
+  imageUrl    String?
+  projectUrl  String?
+  isConcept   Boolean  @default(false)
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+}

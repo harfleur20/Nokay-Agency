@@ -13,8 +13,10 @@
 - [x] Expertises et pages détaillées en français et en anglais
 - [x] Catalogue de tarifs et packages bilingues
 - [x] Formulaires de contact et de devis bilingues
-- [ ] Internationalisation complète des métadonnées HTML
-- [ ] SEO technique, métadonnées sociales et données structurées
+- [x] Attributs de langue localisés sur les contenus EN/FR principaux
+- [ ] Internationalisation complète des métadonnées HTML et document root
+- [x] Métadonnées Open Graph/Twitter, sitemap, robots.txt et URL canonique configurable
+- [ ] Données structurées Organization/LocalBusiness (informations légales et domaine à confirmer)
 - [ ] Audit accessibilité et responsive sur appareils réels
 
 ## Phase 2 — Acquisition et CRM initial

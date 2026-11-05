@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 
 type Lead = { id: string; name: string; email: string; company: string | null; service: string };
 type Quote = { id: string; reference: string; title: string; amountCents: number; currency: string; status: string; validUntil: string | null; createdAt: string; client: { name: string; email: string }; lead: { name: string; email: string } | null };
-const statusLabels: Record<string,string> = { DRAFT: "Brouillon", SENT: "Envoyé", ACCEPTED: "Accepté", REJECTED: "Refusé", EXPIRED: "Expiré" };
+const statusLabels: Record<string,string> = { DRAFT: "Brouillon", SENT: "Envoyer par e-mail", ACCEPTED: "Accepté", REJECTED: "Refusé", EXPIRED: "Expiré" };
 
 export function QuotesManager() {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -48,7 +48,7 @@ export function QuotesManager() {
 
   return <div className="quotes-manager">
     <form className="service-create" onSubmit={create}>
-      <h2>Créer un devis brouillon</h2>
+      <h2>Créer un devis brouillon</h2><p className="admin-subtitle">Le statut « Envoyer par e-mail » transmet le récapitulatif du devis au client via Resend. Le PDF et la signature en ligne ne sont pas encore disponibles.</p>
       <div className="service-form-grid">
         <label>Demande d'origine<select name="leadId" required defaultValue=""><option value="" disabled>Choisir une demande</option>{leads.map((lead) => <option key={lead.id} value={lead.id}>{lead.name} — {lead.email}{lead.company ? ` · ${lead.company}` : ""}</option>)}</select></label>
         <label>Intitulé<input name="title" required minLength={3} maxLength={160} placeholder="Création d'un site vitrine" /></label>

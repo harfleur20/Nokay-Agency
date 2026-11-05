@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
+import Link from "next/link";
+import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
   title: "Digital agency for web, software & brand experiences",
@@ -49,7 +51,7 @@ export default function EnglishHome() {
 
       <section id="expertises" className="section section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> What we do</p><h2>Big ideas.<br /><span>Made real.</span></h2></div><p className="section-heading__aside">We bring strategy, design and development together to create digital solutions that move your business forward.</p></div></Reveal>
-        <div className="service-list">{services.map((service) => <Reveal key={service.number}><article className="service-row"><span className="service-row__number">{service.number}</span><div className="service-row__main"><h3>{service.title}</h3><p>{service.description}</p></div><span className="service-row__tag">{service.tag}</span><span className="service-row__arrow" aria-hidden="true">↗</span></article></Reveal>)}</div>
+        <div className="service-list">{services.map((service) => <Reveal key={service.number}><Link href={["/en/expertise/websites","/en/expertise/web-applications","/en/expertise/saas","/en/expertise/design-communication"][Number(service.number)-1]} className="service-row"><span className="service-row__number">{service.number}</span><div className="service-row__main"><h3>{service.title}</h3><p>{service.description}</p></div><span className="service-row__tag">{service.tag}</span><span className="service-row__arrow" aria-hidden="true">↗</span></Link></Reveal>)}</div>
       </section>
 
       <section id="realisations" className="section projects-section"><div className="section-shell">
@@ -66,7 +68,8 @@ export default function EnglishHome() {
 
       <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Ready to build what's next?</p><h2>Your next idea<br />deserves <span>better.</span></h2><a href="#contact" className="manifesto__link">Let's talk about your project <span>↗</span></a></div></section>
 
-      <footer id="contact" className="site-footer"><div className="section-shell">
+      <ContactForm locale="en" />
+      <footer className="site-footer"><div className="section-shell">
         <div className="site-footer__top"><a href="#top" className="brand brand--footer">NOKAY<span>.</span></a><p>Ideas into digital experiences.</p><a className="footer-contact" href="/#contact">Start a conversation ↗</a></div>
         <div className="site-footer__bottom"><span>© {new Date().getFullYear()} NOKAY. All rights reserved.</span><span>Creativity · Technology · Experience</span><a href="#top">Back to top ↑</a></div>
       </div></footer>

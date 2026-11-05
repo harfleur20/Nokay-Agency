@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
 type SiteHeaderProps = { locale?: "fr" | "en"; homeHref?: string };
 type Service = { title: string; description: string; icon: "mark" | "palette" | "users" | "layout" | "monitor" | "code" | "layers" | "cloud" | "search" | "spark" | "target" | "chart" | "megaphone" };
@@ -76,7 +76,7 @@ const navigation = {
 
 function ServiceIcon({ kind }: { kind: Service["icon"] }) {
   const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
-  const paths: Record<Service["icon"], React.ReactNode> = {
+  const paths: Record<Service["icon"], ReactNode> = {
     mark: <><path d="M12 3.5 14.4 9.6 21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3.5Z"/><circle cx="12" cy="12" r="2.2"/></>,
     palette: <><path d="M12 3a9 9 0 1 0 0 18h1.1a2 2 0 0 0 1.4-3.4 1.7 1.7 0 0 1 1.2-2.9H18a3 3 0 0 0 3-3A9 9 0 0 0 12 3Z"/><circle cx="7.5" cy="11" r=".8"/><circle cx="10" cy="7.5" r=".8"/><circle cx="15" cy="7.8" r=".8"/></>,
     users: <><circle cx="9" cy="8" r="3"/><path d="M3.5 20v-1.4A5.5 5.5 0 0 1 9 13h.5a5.5 5.5 0 0 1 5.5 5.5V20"/><path d="M16 5.3a3 3 0 0 1 0 5.8M17 14a5 5 0 0 1 3.5 4.8V20"/></>,
@@ -142,7 +142,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
               <div className="expertise-mega__details" role="tabpanel">
                 <div className="expertise-mega__services">
                   {active.services.map((service, index) => (
-                    <a key={service.title} className="expertise-mega__service" href={sectionHref("#expertises")} onClick={closeMenus} style={{ "--service-index": index } as React.CSSProperties}>
+                    <a key={service.title} className="expertise-mega__service" href={sectionHref("#expertises")} onClick={closeMenus} style={{ "--service-index": index } as CSSProperties}>
                       <span className="expertise-mega__service-icon"><ServiceIcon kind={service.icon}/></span>
                       <span className="expertise-mega__service-copy"><strong>{service.title}</strong><small>{service.description}</small></span>
                       <span className="expertise-mega__service-arrow" aria-hidden="true">↗</span>

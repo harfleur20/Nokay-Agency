@@ -51,7 +51,7 @@ export function EditorialAccordion({
                   <p className="editorial-accordion__description">{item.description}</p>
                   {item.href && (
                     <Link className="editorial-accordion__link" href={item.href}>
-                      {item.linkLabel ?? (locale === "en" ? "Explore this expertise" : "Découvrir cette expertise")} <span aria-hidden="true">↗</span>
+                      {item.linkLabel ?? (locale === "en" ? "Explore this expertise" : "Découvrir cette expertise")} <span aria-hidden="true">⟶</span>
                     </Link>
                   )}
                 </div>

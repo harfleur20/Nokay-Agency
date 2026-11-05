@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { consumeRateLimit, requestIdentity } from "@/lib/rate-limit";
 
 const allowedServices = new Set(["website", "application", "saas", "design", "other"]);
 const allowedBudgets = new Set(["unknown", "lt3", "3-7", "7-15", "15-30", "gt15", "gt30"]);
@@ -8,6 +10,13 @@ function clean(value: unknown, max: number) {
 }
 
 export async function POST(request: Request) {
+  try {
+    const allowed = await consumeRateLimit("contact", requestIdentity(request), 5, 15 * 60);
+    if (!allowed) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  } catch (error) {
+    console.error("NOKAY contact rate limiter unavailable", error);
+    return NextResponse.json({ error: "service_unavailable" }, { status: 503 });
+  }
   let body: Record<string, unknown>;
   try {
     body = await request.json();
@@ -32,11 +41,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid_fields" }, { status: 400 });
   }
 
+  // Persist the enquiry first: email delivery is a notification, not the source of truth.
+  let lead: { id: string; createdAt: Date };
+  try {
+    lead = await prisma.lead.create({
+      data: { name, email, company: company || null, service, budget, message, source: "website" },
+      select: { id: true, createdAt: true },
+    });
+  } catch (error) {
+    console.error("NOKAY could not persist contact request", error);
+    return NextResponse.json({ error: "persistence_unavailable" }, { status: 503 });
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
   const recipient = process.env.CONTACT_EMAIL;
   const sender = process.env.RESEND_FROM_EMAIL;
   if (!apiKey || !recipient || !sender) {
-    return NextResponse.json({ error: "contact_not_configured" }, { status: 503 });
+    return NextResponse.json({ ok: true, leadId: lead.id, notification: "not_configured" }, { status: 201 });
   }
 
   const serviceLabels: Record<string, string> = {
@@ -74,10 +95,11 @@ export async function POST(request: Request) {
     });
     if (!response.ok) {
       console.error("NOKAY contact email provider returned", response.status);
-      return NextResponse.json({ error: "delivery_failed" }, { status: 502 });
+      return NextResponse.json({ ok: true, leadId: lead.id, notification: "failed" }, { status: 201 });
     }
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ error: "delivery_failed" }, { status: 502 });
+    return NextResponse.json({ ok: true, leadId: lead.id, notification: "sent" }, { status: 201 });
+  } catch (error) {
+    console.error("NOKAY notification delivery failed", error);
+    return NextResponse.json({ ok: true, leadId: lead.id, notification: "failed" }, { status: 201 });
   }
 }

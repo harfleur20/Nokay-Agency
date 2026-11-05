@@ -89,7 +89,8 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 .project-card h3 { margin: 12px 0 7px; font-size: 23px; letter-spacing: -.04em; }
 .project-card > p { margin: 0; color: #999ba2; font-size: 12px; line-height: 1.7; }
 
-.trust-section { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 100px; padding-block: 150px; }
+.trust-section { display: block; padding-block: 150px; }
+.trust-section > div { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 100px; }
 .trust-section h2 { max-width: 780px; font-size: clamp(42px, 6vw, 76px); }
 .trust-section__note { display: flex; align-items: flex-start; gap: 20px; padding-bottom: 7px; }
 .trust-section__symbol { color: var(--accent); font-size: 30px; }
@@ -141,7 +142,8 @@ section[id], footer[id] { scroll-margin-top: 88px; }
   .project-grid { grid-template-columns: 1fr 1fr; }
   .project-card:last-child { grid-column: 1 / -1; }
   .project-card__visual { min-height: 290px; }
-  .trust-section { grid-template-columns: 1fr; gap: 45px; padding-block: 100px; }
+  .trust-section { padding-block: 100px; }
+  .trust-section > div { grid-template-columns: 1fr; gap: 45px; }
   .process-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .process-card { min-height: 205px; padding: 24px; }
   .manifesto { padding-block: 100px; }

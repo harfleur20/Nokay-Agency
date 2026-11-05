@@ -20,6 +20,8 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Resend sert uniquement à notifier l'équipe ; une panne de notification ne supprime pas le lead.
 - Les leads sont consultables dans `/admin`.
 - Les statuts sont modifiables et chaque changement écrit une entrée dans `AuditLog`.
+- Le catalogue interne des prestations permet la création et l’activation/désactivation.
+- Les brouillons de devis peuvent être créés à partir d’un lead ; le récapitulatif peut être envoyé au client via Resend. Les PDF et signatures électroniques restent à développer.
 - Le cookie de session est HTTP-only, SameSite=Lax et Secure en production.
 - Le rôle et l'état actif sont revérifiés en base pour chaque accès protégé.
 

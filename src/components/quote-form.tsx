@@ -41,7 +41,7 @@ export function QuoteForm({ locale, initialService = "", initialPackage = "" }: 
     try {
       const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
         name: data.get("name"), email: data.get("email"), company: data.get("company"),
-        service: data.get("service"), budget: data.get("budget"), message, consent: data.get("consent"), website: data.get("website"),
+        service: ({ websites: "website", apps: "application" } as Record<string, string>)[String(data.get("service"))] || data.get("service"), budget: data.get("budget"), message, consent: data.get("consent"), website: data.get("website"),
       })});
       if (!response.ok) throw new Error("Request failed");
       setStatus("success"); setFeedback(t.success); form.reset();

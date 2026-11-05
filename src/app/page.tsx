@@ -3,7 +3,6 @@ import { Reveal } from "@/components/reveal";
 import { ContactForm } from "@/components/contact-form";
 import { prisma } from "@/lib/prisma";
 import { EditorialAccordion } from "@/components/editorial-accordion";
-import { HeroHeadline } from "@/components/hero-headline";
 
 export const revalidate = 60;
 
@@ -43,7 +42,7 @@ export default async function Home() {
           <source src="https://videos.pexels.com/video-files/6804109/6804109-uhd_4096_2160_25fps.mp4" type="video/mp4" />
         </video>
         <div className="hero__content">
-          <Reveal delay={0.08}><HeroHeadline /></Reveal>
+          <Reveal delay={0.08}><h1 className="hero__headline">Des idées en<br /><span>expériences</span> <span>digitales</span><span className="hero__period">.</span></h1></Reveal>
           <Reveal delay={0.16}>
             <div className="hero__bottom">
               <p>Nous transformons les idées ambitieuses en expériences digitales utiles, désirables et mémorables.</p>

@@ -73,3 +73,10 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - La migration initiale crée les tables métier de base et le limiteur de débit.
 - Les évolutions ultérieures sont ajoutées dans des dossiers de migration distincts : invitations client, session Checkout Stripe et tokens de réinitialisation.
 - Ne jamais modifier une migration déjà appliquée sur un environnement partagé ; ajouter une nouvelle migration pour chaque changement de schéma.
+
+
+## Permissions par rôle
+- `SUPER_ADMIN` et `ADMIN` peuvent gérer les prestations, devis et commandes.
+- `PROJECT_MANAGER` peut gérer les projets et publier les actualités ; il peut également consulter et qualifier les leads.
+- Tous les endpoints de mutation vérifient le rôle côté serveur. Le masquage d'éléments d'interface n'est jamais utilisé comme contrôle d'accès.
+- La gestion de l'équipe, la création/révocation des comptes internes et les permissions plus fines restent à construire.

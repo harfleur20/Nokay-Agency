@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth";
+import { requireRoles } from "@/lib/permissions";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {

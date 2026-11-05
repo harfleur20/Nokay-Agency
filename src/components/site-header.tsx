@@ -7,14 +7,14 @@ type SiteHeaderProps = { locale?: "fr" | "en"; homeHref?: string };
 const navigation = {
   fr: [
     { href: "#expertises", label: "Expertises" },
-    { href: "#realisations", label: "Réalisations" },
+    { href: "/realisations", label: "Réalisations" },
     { href: "#processus", label: "Notre méthode" },
     { href: "/tarifs", label: "Tarifs" },
     { href: "#contact", label: "Contact" },
   ],
   en: [
     { href: "#expertises", label: "Expertise" },
-    { href: "#realisations", label: "Selected work" },
+    { href: "/en/work", label: "Selected work" },
     { href: "#processus", label: "Our process" },
     { href: "/en/pricing", label: "Pricing" },
     { href: "#contact", label: "Contact" },

@@ -36,7 +36,7 @@ export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
         </nav>
         <div className="header-actions">
           <a className="language-switch" href={isEnglish ? "/" : "/en"} lang={isEnglish ? "fr" : "en"}>{isEnglish ? "FR" : "EN"}</a>
-          <a className="header-cta" href={sectionHref("#contact")}>{isEnglish ? "Let's talk about your project" : "Parlons de votre projet"} <span aria-hidden="true">↗</span></a>
+          <a className="header-cta" href={sectionHref("#contact")}>{isEnglish ? "Let's talk about your project" : "Parlons de votre projet"}</a>
           <button type="button" className="menu-toggle" aria-label={open ? (isEnglish ? "Close menu" : "Fermer le menu") : (isEnglish ? "Open menu" : "Ouvrir le menu")} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen((value) => !value)}>
             <span /><span />
           </button>

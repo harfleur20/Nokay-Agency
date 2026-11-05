@@ -417,3 +417,14 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 .project-update-details form > label { display: flex; align-items: center; gap: 9px; color: #a4a5ab; font-size: 11px; }
 .project-update-details form > button { justify-self: start; padding: 11px 14px; border: 0; background: var(--accent); color: #101114; font-size: 11px; font-weight: 750; cursor: pointer; }
 @media (max-width: 650px) { .project-controls { grid-template-columns: 1fr; gap: 15px; } }
+
+.client-progress { height: 7px; margin-top: 18px; overflow: hidden; background: #303237; }
+.client-progress span { display: block; height: 100%; background: var(--accent); }
+.client-updates { display: grid; gap: 14px; margin-top: 22px; padding-top: 16px; border-top: 1px solid rgba(245,245,242,.12); }
+.client-updates > strong { color: var(--accent); font-size: 11px; }
+.client-updates > p { color: #92949b; font-size: 11px; }
+.client-updates > div { display: grid; gap: 6px; padding: 12px; background: #101114; }
+.client-updates > div span { color: #92949b; font-size: 10px; }
+.client-updates > div strong { font-size: 13px; }
+.client-updates > div p { margin: 0; color: #b8bac0; font-size: 12px; line-height: 1.7; white-space: pre-wrap; }
+.client-section-heading { margin-top: 65px; }

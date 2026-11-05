@@ -5,6 +5,8 @@ import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { prisma } from "@/lib/prisma";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Digital agency for web, software & brand experiences",
   description: "NOKAY designs and builds websites, web applications, SaaS products and visual identities.",

@@ -2,6 +2,9 @@ import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
+import { prisma } from "@/lib/prisma";
+
+export const revalidate = 60;
 
 const services = [
   { number: "01", title: "Sites vitrines", tag: "Visibilité & conversion", description: "Des sites singuliers qui racontent votre histoire, valorisent votre expertise et transforment l’attention en opportunités." },
@@ -25,7 +28,11 @@ const steps = [
   ["06", "Livraison & accompagnement", "Nous préparons la mise en ligne et vous accompagnons dans la prise en main."],
 ];
 
-export default function Home() {
+export default async function Home() {
+  let portfolioItems: Awaited<ReturnType<typeof prisma.portfolioItem.findMany>> = [];
+  try { portfolioItems = await prisma.portfolioItem.findMany({ where: { published: true }, orderBy: { createdAt: "desc" }, take: 6 }); }
+  catch (error) { console.error("NOKAY portfolio could not be loaded", error); }
+  const projects = portfolioItems.length ? portfolioItems.map((item, index) => ({ number: String(index + 1).padStart(2, "0"), type: item.category, title: item.title, description: item.summary, tone: ["project-card--lime", "project-card--violet", "project-card--orange"][index % 3], mark: `${item.title.slice(0, 1).toUpperCase()}.`, isConcept: item.isConcept, imageUrl: item.imageUrl, projectUrl: item.projectUrl })) : concepts.map((item) => ({ ...item, isConcept: true, imageUrl: null, projectUrl: null }));
   return (
     <main id="top">
       <SiteHeader />
@@ -55,7 +62,7 @@ export default function Home() {
 
       <section id="realisations" className="section projects-section"><div className="section-shell">
         <Reveal><div className="section-heading section-heading--light"><div><p className="eyebrow"><span className="eyebrow__line" /> Sélection créative</p><h2>Explorer<br /><span>les possibles.</span></h2></div><p className="section-heading__aside">Quelques directions créatives illustrant notre approche. Ces visuels sont des concepts de démonstration, pas des références clients.</p></div></Reveal>
-        <div className="project-grid">{concepts.map((project) => <Reveal key={project.number}><article className={`project-card ${project.tone}`}><div className="project-card__visual"><span className="project-card__mark">{project.mark}</span><span className="project-card__index">{project.number}</span><span className="project-card__orbit" /></div><div className="project-card__meta"><span>{project.type}</span><span>Concept créatif</span></div><h3>{project.title}</h3><p>{project.description}</p></article></Reveal>)}</div>
+        <div className="project-grid">{projects.map((project) => <Reveal key={project.number}><article className={`project-card ${project.tone}`}><div className="project-card__visual" style={project.imageUrl ? { backgroundImage: `linear-gradient(rgba(16,17,20,.2),rgba(16,17,20,.55)),url("${project.imageUrl}")`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}><span className="project-card__mark">{project.mark}</span><span className="project-card__index">{project.number}</span><span className="project-card__orbit" /></div><div className="project-card__meta"><span>{project.type}</span><span>{project.isConcept ? "Concept créatif" : "Projet publié"}</span></div><h3>{project.title}</h3><p>{project.description}</p>{project.projectUrl && <a className="portfolio-project-link" href={project.projectUrl} target="_blank" rel="noreferrer">Découvrir le projet ↗</a>}</article></Reveal>)}</div>
       </div></section>
 
       <section className="trust-section section-shell"><Reveal><div className="trust-section__copy"><p className="eyebrow"><span className="eyebrow__line" /> La confiance, avant tout</p><h2>Les belles collaborations commencent par <span>une rencontre.</span></h2></div><div className="trust-section__note"><span className="trust-section__symbol">✳</span><p>Nous présenterons ici nos clients et partenaires avec leur accord. Chaque collaboration mérite d’être racontée avec justesse.</p></div></Reveal></section>

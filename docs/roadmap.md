@@ -42,7 +42,8 @@
 - [ ] Gestion des utilisateurs et invitations d’équipe
 - [x] Gestion initiale des prestations (création, activation/désactivation) depuis le back-office
 - [x] Gestion initiale des projets, étapes, progression et actualités client depuis le back-office
-- [ ] CMS, portfolio et références
+- [x] CMS portfolio : création, publication et distinction concepts/projets
+- [ ] Gestion des références clients avec autorisation de publication
 - [ ] Traductions, notifications et journal d'audit complet
 
 ## Phase 5 — Espace client

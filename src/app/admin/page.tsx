@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
 import { LeadStatusControl } from "./lead-status";
+import { LogoutButton } from "./logout-button";
 
 export const metadata = { title: "Administration | NOKAY", robots: { index: false, follow: false } };
 
@@ -17,7 +18,7 @@ export default async function AdminDashboard() {
     prisma.lead.count({ where: { status: "NEW" } }),
     prisma.lead.count({ where: { status: "WON" } }),
   ]);
-  return <main className="admin-page"><header className="admin-topbar"><a href="/" className="brand">NOKAY<span>.</span></a><div><span>{admin.name} · {admin.role}</span><form action="/api/auth/logout" method="post"><button>Déconnexion ↗</button></form></div></header>
+  return <main className="admin-page"><header className="admin-topbar"><a href="/" className="brand">NOKAY<span>.</span></a><div><span>{admin.name} · {admin.role}</span><LogoutButton /></div></header>
     <section className="admin-content"><p className="eyebrow">ESPACE DE GESTION / NOKAY</p><h1>Tableau de bord<span>.</span></h1><p className="admin-subtitle">Suivez les demandes entrantes et leur avancement.</p>
       <div className="admin-stats"><article><span>Total demandes</span><strong>{total}</strong></article><article><span>Nouvelles</span><strong>{newCount}</strong></article><article><span>Projets gagnés</span><strong>{wonCount}</strong></article></div>
       <div className="admin-table-heading"><h2>Demandes de devis</h2><span>{leads.length} dernières demandes</span></div>

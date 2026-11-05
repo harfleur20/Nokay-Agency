@@ -11,7 +11,7 @@ export async function GET() {
   const admin = await requireAdmin();
   if (!admin) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const [quotes, leads] = await Promise.all([
-    prisma.quote.findMany({ include: { client: { select: { name: true, email: true } }, lead: { select: { name: true, email: true } } }, orderBy: { createdAt: "desc" }, take: 100 }),
+    prisma.quote.findMany({ include: { client: { select: { name: true, email: true } }, lead: { select: { name: true, email: true } }, order: { select: { id: true, reference: true } } }, orderBy: { createdAt: "desc" }, take: 100 }),
     prisma.lead.findMany({ where: { status: { notIn: ["LOST", "ARCHIVED"] } }, select: { id: true, name: true, email: true, company: true, service: true }, orderBy: { createdAt: "desc" }, take: 100 }),
   ]);
   return NextResponse.json({ quotes, leads });

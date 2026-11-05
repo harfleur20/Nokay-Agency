@@ -113,3 +113,6 @@ CREATE TABLE "AccountInvite" (
 CREATE UNIQUE INDEX "AccountInvite_tokenHash_key" ON "AccountInvite"("tokenHash");
 CREATE INDEX "AccountInvite_userId_expiresAt_idx" ON "AccountInvite"("userId", "expiresAt");
 ALTER TABLE "AccountInvite" ADD CONSTRAINT "AccountInvite_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE "Payment" ADD COLUMN "providerCheckoutSessionId" TEXT;
+CREATE UNIQUE INDEX "Payment_providerCheckoutSessionId_key" ON "Payment"("providerCheckoutSessionId");

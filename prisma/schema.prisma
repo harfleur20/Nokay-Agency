@@ -82,6 +82,7 @@ model Lead {
   source    String    @default("website")
   ownerId   String?
   owner     User?      @relation("LeadOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  quotes    Quote[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 
@@ -107,6 +108,8 @@ model Quote {
   reference   String      @unique
   clientId    String
   client      User        @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  leadId      String?
+  lead        Lead?       @relation(fields: [leadId], references: [id], onDelete: SetNull)
   title       String
   description String?     @db.Text
   amountCents Int
@@ -117,6 +120,8 @@ model Quote {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   order       Order?
+
+  @@index([leadId])
 }
 
 model Order {

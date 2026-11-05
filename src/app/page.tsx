@@ -38,8 +38,6 @@ export default async function Home() {
       <SiteHeader />
 
       <section className="hero section-shell">
-        <div className="hero__orb hero__orb--one" aria-hidden="true" />
-        <div className="hero__orb hero__orb--two" aria-hidden="true" />
         <div className="hero__content">
           <Reveal><p className="eyebrow"><span className="eyebrow__line" /> Studio digital indépendant · Créativité & technologie</p></Reveal>
           <Reveal delay={0.08}><h1>Ideas into<br /><span>digital</span> experiences<span className="hero__period">.</span></h1></Reveal>

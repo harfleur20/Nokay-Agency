@@ -152,6 +152,7 @@ model Payment {
   status                 PaymentStatus @default(PENDING)
   provider               String        @default("stripe")
   providerPaymentIntentId String?      @unique
+  providerCheckoutSessionId String?    @unique
   idempotencyKey         String?       @unique
   paidAt                 DateTime?
   createdAt              DateTime      @default(now())

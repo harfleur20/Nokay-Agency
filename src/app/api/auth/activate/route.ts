@@ -3,8 +3,11 @@ import { createHash } from "node:crypto";
 import { hash } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/auth";
+import { consumeRateLimit, requestIdentity } from "@/lib/rate-limit";
 
 export async function POST(request: Request) {
+  try { if (!await consumeRateLimit("account-activation", requestIdentity(request), 5, 15 * 60)) return NextResponse.json({ error: "rate_limited" }, { status: 429 }); }
+  catch { return NextResponse.json({ error: "service_unavailable" }, { status: 503 }); }
   let body: Record<string, unknown>;
   try { body = await request.json(); } catch { return NextResponse.json({ error: "invalid_payload" }, { status: 400 }); }
   const token = typeof body.token === "string" ? body.token.slice(0, 200) : "";

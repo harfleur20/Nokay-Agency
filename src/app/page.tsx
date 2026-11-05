@@ -1,5 +1,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
+import Link from "next/link";
+import { ContactForm } from "@/components/contact-form";
 
 const services = [
   { number: "01", title: "Sites vitrines", tag: "Visibilité & conversion", description: "Des sites singuliers qui racontent votre histoire, valorisent votre expertise et transforment l’attention en opportunités." },
@@ -48,7 +50,7 @@ export default function Home() {
 
       <section id="expertises" className="section section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> Nos expertises</p><h2>Des idées.<br /><span>Du concret.</span></h2></div><p className="section-heading__aside">Nous réunissons stratégie, design et développement pour créer des solutions digitales qui servent vos ambitions.</p></div></Reveal>
-        <div className="service-list">{services.map((service) => <Reveal key={service.number}><article className="service-row"><span className="service-row__number">{service.number}</span><div className="service-row__main"><h3>{service.title}</h3><p>{service.description}</p></div><span className="service-row__tag">{service.tag}</span><span className="service-row__arrow" aria-hidden="true">↗</span></article></Reveal>)}</div>
+        <div className="service-list">{services.map((service) => <Reveal key={service.number}><Link href={["/expertises/sites-vitrines","/expertises/applications-web","/expertises/saas","/expertises/design-communication"][Number(service.number)-1]} className="service-row"><span className="service-row__number">{service.number}</span><div className="service-row__main"><h3>{service.title}</h3><p>{service.description}</p></div><span className="service-row__tag">{service.tag}</span><span className="service-row__arrow" aria-hidden="true">↗</span></Link></Reveal>)}</div>
       </section>
 
       <section id="realisations" className="section projects-section"><div className="section-shell">
@@ -65,7 +67,8 @@ export default function Home() {
 
       <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Et si on construisait la suite ?</p><h2>Votre prochaine<br />idée mérite <span>mieux.</span></h2><a href="#contact" className="manifesto__link">Parlons de votre projet <span>↗</span></a></div></section>
 
-      <footer id="contact" className="site-footer"><div className="section-shell">
+      <ContactForm locale="fr" />
+      <footer className="site-footer"><div className="section-shell">
         <div className="site-footer__top"><a href="#top" className="brand brand--footer">NOKAY<span>.</span></a><p>Ideas into digital experiences.</p><a className="footer-contact" href="#expertises">Découvrir nos expertises ↗</a></div>
         <div className="site-footer__bottom"><span>© {new Date().getFullYear()} NOKAY. Tous droits réservés.</span><span>Créativité · Technologie · Expérience</span><a href="#top">Retour en haut ↑</a></div>
       </div></footer>

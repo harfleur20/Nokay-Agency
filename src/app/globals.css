@@ -404,3 +404,16 @@ section[id], footer[id] { scroll-margin-top: 88px; }
 .quote-row .admin-lead__main { align-items: center; }
 .quote-row .admin-lead__main > strong { color: var(--accent); white-space: nowrap; }
 .quote-row .admin-lead__meta select { min-width: 130px; }
+
+.project-description { color: #b8bac0; font-size: 12px; line-height: 1.7; }
+.project-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+.project-controls label { display: grid; gap: 9px; color: #a4a5ab; font-size: 11px; }
+.project-controls select { width: 100%; padding: 10px; border: 1px solid rgba(245,245,242,.18); background: #101114; color: #f5f5f2; }
+.project-controls input[type="range"] { width: 100%; accent-color: var(--accent); }
+.project-update-details { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(245,245,242,.12); }
+.project-update-details summary { color: var(--accent); font-size: 11px; cursor: pointer; }
+.project-update-details form { display: grid; gap: 10px; margin-top: 15px; }
+.project-update-details input:not([type="checkbox"]), .project-update-details textarea { width: 100%; padding: 12px; border: 1px solid rgba(245,245,242,.18); background: #101114; color: #f5f5f2; font: inherit; font-size: 12px; }
+.project-update-details form > label { display: flex; align-items: center; gap: 9px; color: #a4a5ab; font-size: 11px; }
+.project-update-details form > button { justify-self: start; padding: 11px 14px; border: 0; background: var(--accent); color: #101114; font-size: 11px; font-weight: 750; cursor: pointer; }
+@media (max-width: 650px) { .project-controls { grid-template-columns: 1fr; gap: 15px; } }

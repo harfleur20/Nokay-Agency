@@ -16,7 +16,8 @@
 - [x] Accueil immersif initial et animations accessibles
 - [x] Sections expertises, concepts portfolio, références et processus
 - [ ] Pages détaillées par expertise
-- [ ] Internationalisation française / anglaise
+- [x] Accueil et navigation disponibles en français et en anglais (base d'internationalisation)
+- [ ] Internationalisation complète de toutes les pages et métadonnées localisées
 - [ ] Formulaire de contact fonctionnel
 - [ ] SEO technique complet, métadonnées sociales et données structurées
 - [ ] Vérification accessibilité et responsive sur appareils réels

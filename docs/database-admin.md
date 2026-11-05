@@ -41,3 +41,13 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Le token d'invitation est stocké sous forme de hash et ne peut être utilisé qu'une seule fois.
 - L'espace `/account` affiche uniquement les projets, actualités visibles, devis et commandes du compte connecté.
 - Les clients ne peuvent pas accéder aux routes `/api/admin/*` ; les endpoints admin revérifient les rôles.
+
+
+## Paiements Stripe
+- Un devis accepté peut être converti en commande depuis le back-office ; l'acompte peut être défini entre 0 et 100 %.
+- Le client connecté peut payer l'acompte ou le solde depuis son espace.
+- Une session Checkout ouverte est réutilisée pour éviter les doublons ; une session expirée libère la commande pour une nouvelle tentative.
+- Le webhook vérifie la signature Stripe et met à jour le paiement de manière idempotente.
+- Configurer `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` et `AUTH_URL`.
+- Déclarer dans Stripe l'endpoint `/api/stripe/webhook` et au minimum les événements `checkout.session.completed`, `checkout.session.expired`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed` et `payment_intent.payment_failed`.
+- Tester en mode Stripe test avant toute activation en production. Les factures PDF, remboursements et règles de TVA ne sont pas inclus.

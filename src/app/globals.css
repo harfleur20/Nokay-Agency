@@ -382,3 +382,19 @@ section[id], footer[id] { scroll-margin-top: 88px; }
   .admin-lead__main { align-items: flex-start; flex-direction: column; }
   .admin-lead__main > div { align-items: flex-start; flex-direction: column; gap: 5px; }
 }
+
+.service-create { display: grid; gap: 18px; margin: 35px 0; padding: 26px; border: 1px solid rgba(245,245,242,.14); background: #17191b; }
+.service-create h2 { margin: 0; font-size: 20px; }
+.service-form-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+.service-form-grid label { display: grid; gap: 7px; color: #b8bac0; font-size: 11px; }
+.service-form-grid input, .service-form-grid textarea { width: 100%; padding: 12px; border: 1px solid rgba(245,245,242,.18); background: #101114; color: #f5f5f2; font: inherit; font-size: 12px; }
+.service-create > button, .service-row > button { justify-self: start; padding: 12px 15px; border: 0; background: var(--accent); color: #101114; font-size: 11px; font-weight: 750; cursor: pointer; }
+.service-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.service-row > div { display: grid; gap: 7px; }
+.service-row > div span { color: #a4a5ab; font-size: 11px; }
+.service-row code { color: var(--accent); }
+.service-active, .service-inactive { font-size: 10px; }
+.service-active { color: var(--accent); }
+.service-inactive { color: #f4a6a6; }
+.admin-error { color: #ff9b9b; font-size: 12px; }
+@media (max-width: 700px) { .service-form-grid { grid-template-columns: 1fr; } .service-row { align-items: flex-start; flex-direction: column; } }

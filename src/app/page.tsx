@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { prisma } from "@/lib/prisma";
 
+export const revalidate = 60;
+
 const services = [
   { number: "01", title: "Sites vitrines", tag: "Visibilité & conversion", description: "Des sites singuliers qui racontent votre histoire, valorisent votre expertise et transforment l’attention en opportunités." },
   { number: "02", title: "Applications web", tag: "Outils & expériences", description: "Des plateformes et outils métier pensés autour de vos utilisateurs, de vos processus et de vos objectifs." },

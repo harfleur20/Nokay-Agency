@@ -8,9 +8,9 @@ function hashedKey(scope: string, identity: string) {
 }
 
 export function requestIdentity(request: Request) {
-  const forwarded = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
   const real = request.headers.get("x-real-ip")?.trim();
-  return forwarded || real || "unknown";
+  const forwarded = request.headers.get("x-forwarded-for")?.split(",").at(-1)?.trim();
+  return real || forwarded || "unknown";
 }
 
 /** Atomic PostgreSQL counter. The raw IP is never stored. */

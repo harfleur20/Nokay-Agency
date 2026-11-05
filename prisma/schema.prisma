@@ -68,6 +68,7 @@ model User {
   orders       Order[]
   projects     Project[]
   auditLogs    AuditLog[]
+  invites      AccountInvite[]
 }
 
 model Lead {
@@ -222,4 +223,16 @@ model RateLimitBucket {
   createdAt DateTime @default(now())
 
   @@index([resetAt])
+}
+
+model AccountInvite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([userId, expiresAt])
 }

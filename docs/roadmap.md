@@ -38,15 +38,17 @@
 ## Phase 4 — Back-office
 - [ ] Gestion clients, rôles et permissions granulaires
 - [x] Gestion initiale des prestations (création, activation/désactivation) depuis le back-office
-- [ ] Gestion des projets, jalons et tâches
+- [x] Gestion initiale des projets, étapes, progression et actualités client depuis le back-office
 - [ ] CMS, portfolio et références
 - [ ] Traductions, notifications et journal d'audit complet
 
 ## Phase 5 — Espace client
-- [ ] Authentification client et récupération de compte
-- [ ] Tableau de bord et suivi de projet
-- [ ] Devis, commandes, paiements et factures
-- [ ] Documents privés et notifications
+- [x] Activation de compte client par invitation sécurisée et authentification
+- [ ] Récupération et réinitialisation de mot de passe
+- [x] Tableau de bord client et suivi de projet (lecture)
+- [x] Consultation des devis, commandes et paiements enregistrés
+- [ ] Paiement en ligne et téléchargement des factures
+- [ ] Documents privés et notifications automatiques
 - [ ] Contrôle d'isolation des données entre clients
 
 ## Phase 6 — Qualité, conformité et lancement

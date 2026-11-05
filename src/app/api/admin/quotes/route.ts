@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { randomBytes } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { hash } from "bcryptjs";
 import { QuoteStatus, UserRole } from "@prisma/client";
 import { requireAdmin } from "@/lib/auth";
@@ -74,6 +74,17 @@ export async function PATCH(request: Request) {
       const sender = process.env.RESEND_FROM_EMAIL;
       if (!apiKey || !recipient || !sender) return NextResponse.json({ error: "email_not_configured" }, { status: 503 });
       const amount = (existing.amountCents / 100).toLocaleString("fr-FR", { style: "currency", currency: existing.currency });
+      let activationUrl = "";
+      let inviteId = "";
+      if (!existing.client.active) {
+        const token = randomBytes(32).toString("base64url");
+        const tokenHash = createHash("sha256").update(token).digest("hex");
+        await prisma.accountInvite.updateMany({ where: { userId: existing.client.id, usedAt: null }, data: { expiresAt: new Date() } });
+        const invite = await prisma.accountInvite.create({ data: { userId: existing.client.id, tokenHash, expiresAt: new Date(Date.now() + 72 * 60 * 60 * 1000) } });
+        inviteId = invite.id;
+        const baseUrl = (process.env.AUTH_URL || new URL(request.url).origin).replace(/\\/$/, "");
+        activationUrl = `${baseUrl}/account/activate?token=${encodeURIComponent(token)}`;
+      }
       const text = [
         `Bonjour ${existing.client.name},`,
         "",
@@ -83,6 +94,9 @@ export async function PATCH(request: Request) {
         `Montant : ${amount} HT`,
         existing.description || "",
         existing.validUntil ? `Offre valable jusqu'au ${existing.validUntil.toLocaleDateString("fr-FR")}.` : "",
+        activationUrl ? "" : "",
+        activationUrl ? "Votre espace client est prêt. Activez-le avec le lien personnel ci-dessous (valable 72 heures) :" : "",
+        activationUrl,
         "",
         "Pour toute question, répondez directement à cet e-mail.",
         "L'équipe NOKAY",
@@ -92,7 +106,10 @@ export async function PATCH(request: Request) {
         headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({ from: sender, to: [existing.client.email], reply_to: recipient, subject: `NOKAY — Votre proposition ${existing.reference}`, text }),
       });
-      if (!sent.ok) return NextResponse.json({ error: "quote_email_failed" }, { status: 502 });
+      if (!sent.ok) {
+        if (inviteId) await prisma.accountInvite.delete({ where: { id: inviteId } });
+        return NextResponse.json({ error: "quote_email_failed" }, { status: 502 });
+      }
     }
 
     const quote = await prisma.quote.update({ where: { id }, data: { status: status as QuoteStatus } });

@@ -53,3 +53,11 @@ export async function requireAdmin() {
   if (!user?.active || !["SUPER_ADMIN", "ADMIN", "PROJECT_MANAGER"].includes(user.role)) return null;
   return user;
 }
+
+export async function requireClient() {
+  const session = await getSession();
+  if (!session || session.role !== "CLIENT") return null;
+  const user = await prisma.user.findUnique({ where: { id: session.userId }, select: { id: true, name: true, email: true, role: true, active: true } });
+  if (!user?.active || user.role !== "CLIENT") return null;
+  return user;
+}

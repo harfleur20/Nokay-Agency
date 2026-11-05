@@ -22,6 +22,7 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Les statuts sont modifiables et chaque changement écrit une entrée dans `AuditLog`.
 - Le catalogue interne des prestations permet la création et l’activation/désactivation.
 - Les brouillons de devis peuvent être créés à partir d’un lead ; le récapitulatif peut être envoyé au client via Resend. Les PDF et signatures électroniques restent à développer.
+- Les projets peuvent être créés pour un contact client, suivre une étape et une progression, et recevoir des actualités dont la visibilité client est paramétrable. Le portail client et son authentification restent à construire.
 - Le cookie de session est HTTP-only, SameSite=Lax et Secure en production.
 - Le rôle et l'état actif sont revérifiés en base pour chaque accès protégé.
 
@@ -33,3 +34,10 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Activer sauvegardes PostgreSQL chiffrées et tester régulièrement une restauration.
 - Définir la durée de conservation et la procédure d'effacement des demandes conformément au RGPD.
 - Les rôles PROJECT_MANAGER et ADMIN ont actuellement le même accès au tableau des leads ; les permissions fines restent à implémenter.
+
+
+## Espace client initial
+- Le premier envoi d'un devis à un contact crée une invitation d'activation valable 72 heures pour son compte client.
+- Le token d'invitation est stocké sous forme de hash et ne peut être utilisé qu'une seule fois.
+- L'espace `/account` affiche uniquement les projets, actualités visibles, devis et commandes du compte connecté.
+- Les clients ne peuvent pas accéder aux routes `/api/admin/*` ; les endpoints admin revérifient les rôles.

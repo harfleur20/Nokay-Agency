@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
-import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { prisma } from "@/lib/prisma";
 import { EditorialAccordion } from "@/components/editorial-accordion";
@@ -28,12 +27,12 @@ const concepts = [
 ];
 
 const steps = [
-  ["Discovery", "We learn about your business, users, challenges and ambitions."],
-  ["Strategy & planning", "We define the scope, align priorities and shape the right solution."],
-  ["Design & prototyping", "We bring the experience to life through interfaces and prototypes."],
-  ["Development", "We build your product with care for quality, accessibility and performance."],
-  ["Testing & validation", "We test user journeys, content, responsive layouts and features."],
-  ["Delivery & support", "We prepare the launch and help you take ownership of your solution."],
+  { title: "Discovery", description: "We learn about your business, users, challenges and ambitions." },
+  { title: "Strategy & planning", description: "We define the scope, align priorities and shape the right solution." },
+  { title: "Design & prototyping", description: "We bring the experience to life through interfaces and prototypes." },
+  { title: "Development", description: "We build your product with care for quality, accessibility and performance." },
+  { title: "Testing & validation", description: "We test user journeys, content, responsive layouts and features." },
+  { title: "Delivery & support", description: "We prepare the launch and help you take ownership of your solution." },
 ];
 
 export default async function EnglishHome() {
@@ -71,7 +70,7 @@ export default async function EnglishHome() {
 
       <section id="processus" className="section process-section"><div className="section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> How we work</p><h2>From idea<br /><span>to impact.</span></h2></div><p className="section-heading__aside">A clear framework, regular conversations and visible progress at every stage.</p></div></Reveal>
-        <EditorialAccordion items={steps.map(([title, description]) => ({ title, description }))} locale="en" className="process-accordion" />
+        <EditorialAccordion items={steps} locale="en" className="process-accordion" />
       </div></section>
 
       <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Ready to build what's next?</p><h2>Your next idea<br />deserves <span>better.</span></h2><a href="#contact" className="manifesto__link">Let's talk about your project <span>↗</span></a></div></section>

@@ -724,3 +724,18 @@ section[id], footer[id] { scroll-margin-top: 88px; }
   .project-card__view { opacity: 1; transform: none; inset: auto 14px 14px auto; padding: 10px 13px; background: rgba(16,17,20,.78); }
 }
 @media (prefers-reduced-motion: reduce) { .project-card__view, .project-card__visual { transition: none; } }
+
+
+/* French hero headline with a restrained typewriter cycle */
+.hero__headline { max-width: 1000px; }
+.hero__typed-word { display: inline-flex; align-items: baseline; min-width: 0; color: var(--accent); white-space: nowrap; }
+.hero__typed-word > span:first-child { display: inline-block; }
+.hero__caret {
+  display: inline-block; width: 3px; height: .78em; margin-left: .08em;
+  background: var(--accent); transform: translateY(.06em);
+  animation: hero-caret-blink .8s steps(2, start) infinite;
+}
+@keyframes hero-caret-blink { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero__caret { animation: none; opacity: 0; }
+}

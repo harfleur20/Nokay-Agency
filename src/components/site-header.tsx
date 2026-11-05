@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-type SiteHeaderProps = { locale?: "fr" | "en" };
+type SiteHeaderProps = { locale?: "fr" | "en"; homeHref?: string };
 
 const navigation = {
   fr: [
@@ -19,7 +19,7 @@ const navigation = {
   ],
 };
 
-export function SiteHeader({ locale = "fr" }: SiteHeaderProps) {
+export function SiteHeader({ locale = "fr", homeHref = "" }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
   const links = navigation[locale];
   const isEnglish = locale === "en";
@@ -29,7 +29,7 @@ export function SiteHeader({ locale = "fr" }: SiteHeaderProps) {
       <div className="site-header__inner">
         <a href={isEnglish ? "/en" : "/"} className="brand" aria-label="NOKAY, home">NOKAY<span>.</span></a>
         <nav className="desktop-nav" aria-label={isEnglish ? "Main navigation" : "Navigation principale"}>
-          {links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+          {links.map((link) => <a key={link.href} href={homeHref ? `${homeHref}/${link.href}` : link.href}>{link.label}</a>)}
         </nav>
         <div className="header-actions">
           <a className="language-switch" href={isEnglish ? "/" : "/en"} lang={isEnglish ? "fr" : "en"}>{isEnglish ? "FR" : "EN"}</a>

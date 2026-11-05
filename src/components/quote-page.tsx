@@ -4,7 +4,7 @@ import { QuoteForm } from "@/components/quote-form";
 
 export function QuotePage({ locale, service = "", packageName = "" }: { locale: "fr" | "en"; service?: string; packageName?: string }) {
   const en = locale === "en";
-  return <main id="top">
+  return <main id="top" lang={locale}>
     <SiteHeader locale={locale} homeHref={en ? "/en" : "/"} />
     <section className="quote-hero section-shell">
       <p className="eyebrow"><span className="eyebrow__line" /> {en ? "Project enquiry / NOKAY" : "Demande de projet / NOKAY"}</p>

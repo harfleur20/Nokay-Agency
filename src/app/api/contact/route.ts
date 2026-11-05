@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { consumeRateLimit, requestIdentity } from "@/lib/rate-limit";
 
 const allowedServices = new Set(["website", "application", "saas", "design", "other"]);
 const allowedBudgets = new Set(["unknown", "lt3", "3-7", "7-15", "15-30", "gt15", "gt30"]);
@@ -9,6 +10,13 @@ function clean(value: unknown, max: number) {
 }
 
 export async function POST(request: Request) {
+  try {
+    const allowed = await consumeRateLimit("contact", requestIdentity(request), 5, 15 * 60);
+    if (!allowed) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  } catch (error) {
+    console.error("NOKAY contact rate limiter unavailable", error);
+    return NextResponse.json({ error: "service_unavailable" }, { status: 503 });
+  }
   let body: Record<string, unknown>;
   try {
     body = await request.json();

@@ -38,10 +38,10 @@ export async function POST(request: Request) {
   try {
     const temporaryPassword = randomBytes(48).toString("base64url");
     const passwordHash = await hash(temporaryPassword, 12);
-    const client = await prisma.user.upsert({
-      where: { email: lead.email.toLowerCase() },
-      update: {},
-      create: { name: lead.name, email: lead.email.toLowerCase(), passwordHash, role: UserRole.CLIENT, active: false },
+    const existingClient = await prisma.user.findUnique({ where: { email: lead.email.toLowerCase() } });
+    if (existingClient && existingClient.role !== UserRole.CLIENT) return NextResponse.json({ error: "email_already_used_by_staff_account" }, { status: 409 });
+    const client = existingClient || await prisma.user.create({
+      data: { name: lead.name, email: lead.email.toLowerCase(), passwordHash, role: UserRole.CLIENT, active: false },
     });
     const reference = `NK-${new Date().getFullYear()}-${randomBytes(3).toString("hex").toUpperCase()}`;
     const quote = await prisma.quote.create({

@@ -59,3 +59,11 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Le parcours mot de passe oublié ne révèle pas si une adresse existe.
 - Les liens de réinitialisation sont à usage unique, stockés sous forme de hash et expirent après une heure.
 - Les demandes de réinitialisation sont limitées à cinq par IP et par fenêtre de quinze minutes.
+
+
+## Décisions client et récupération d'accès
+- Un devis envoyé et non expiré peut être accepté ou refusé depuis l'espace client. La modification est conditionnée par l'identifiant du client et l'état courant du devis.
+- Le client peut demander une réinitialisation depuis `/account/forgot-password`. La réponse ne révèle jamais si l'adresse e-mail existe.
+- Le lien de réinitialisation expire après une heure, le token est stocké sous forme de hash et ne peut être consommé qu'une fois.
+- La page `/account/reset-password` impose un mot de passe d'au moins 12 caractères.
+- Les parcours d'activation et de réinitialisation sont protégés par une limitation de débit.

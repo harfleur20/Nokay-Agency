@@ -7,6 +7,7 @@ export type EditorialAccordionItem = {
   title: string;
   description: string;
   meta?: string;
+  tag?: string;
   href?: string;
   linkLabel?: string;
 };
@@ -46,7 +47,7 @@ export function EditorialAccordion({
             <div className="editorial-accordion__panel" id={panelId} aria-hidden={!isOpen}>
               <div className="editorial-accordion__panel-inner">
                 <div className="editorial-accordion__content">
-                  {item.meta && <p className="editorial-accordion__meta">{item.meta}</p>}
+                  {(item.meta || item.tag) && <p className="editorial-accordion__meta">{item.meta || item.tag}</p>}
                   <p className="editorial-accordion__description">{item.description}</p>
                   {item.href && (
                     <Link className="editorial-accordion__link" href={item.href}>

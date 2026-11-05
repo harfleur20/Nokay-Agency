@@ -13,5 +13,5 @@ export function ClientLoginForm() {
       window.location.assign("/account");
     } catch(e) { setError(e instanceof Error ? e.message : "Erreur de connexion."); setLoading(false); }
   }
-  return <form className="admin-login-form" onSubmit={submit}><label>Adresse e-mail<input name="email" type="email" autoComplete="username" required /></label><label>Mot de passe<input name="password" type="password" autoComplete="current-password" required /></label><button disabled={loading}>{loading ? "Connexion…" : "Accéder à mon espace"} ↗</button>{error && <p role="alert">{error}</p>}</form>;
+  return <><form className="admin-login-form" onSubmit={submit}><label>Adresse e-mail<input name="email" type="email" autoComplete="username" required /></label><label>Mot de passe<input name="password" type="password" autoComplete="current-password" required /></label><button disabled={loading}>{loading ? "Connexion…" : "Accéder à mon espace"} ↗</button>{error && <p role="alert">{error}</p>}</form><a className="admin-back" href="/account/forgot-password">Mot de passe oublié ?</a></>;
 }

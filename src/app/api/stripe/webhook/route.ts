@@ -28,7 +28,11 @@ export async function POST(request: Request) {
       await prisma.$transaction(async (tx) => {
         const payment = await tx.payment.findUnique({ where: { id: paymentId } });
         if (!payment || payment.status === PaymentStatus.SUCCEEDED) return;
-        await tx.payment.update({ where: { id: paymentId }, data: { status: PaymentStatus.SUCCEEDED, paidAt: new Date(), providerPaymentIntentId: paymentIntentId || null } });
+        const claimed = await tx.payment.updateMany({
+          where: { id: paymentId, status: PaymentStatus.PENDING },
+          data: { status: PaymentStatus.SUCCEEDED, paidAt: new Date(), providerPaymentIntentId: paymentIntentId || null },
+        });
+        if (claimed.count !== 1) return;
         await tx.order.update({ where: { id: payment.orderId }, data: { status: OrderStatus.IN_PROGRESS } });
       });
     }

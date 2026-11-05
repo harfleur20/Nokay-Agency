@@ -51,3 +51,25 @@ Le schéma Prisma couvre les utilisateurs et rôles, leads, prestations, devis, 
 - Configurer `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` et `AUTH_URL`.
 - Déclarer dans Stripe l'endpoint `/api/stripe/webhook` et au minimum les événements `checkout.session.completed`, `checkout.session.expired`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed` et `payment_intent.payment_failed`.
 - Tester en mode Stripe test avant toute activation en production. Les factures PDF, remboursements et règles de TVA ne sont pas inclus.
+
+
+## Sécurité des comptes clients
+- Le client peut accepter ou refuser un devis uniquement si celui-ci lui appartient et qu'il est au statut `SENT`.
+- La décision est atomique et inscrite dans le journal d'audit.
+- Le parcours mot de passe oublié ne révèle pas si une adresse existe.
+- Les liens de réinitialisation sont à usage unique, stockés sous forme de hash et expirent après une heure.
+- Les demandes de réinitialisation sont limitées à cinq par IP et par fenêtre de quinze minutes.
+
+
+## Décisions client et récupération d'accès
+- Un devis envoyé et non expiré peut être accepté ou refusé depuis l'espace client. La modification est conditionnée par l'identifiant du client et l'état courant du devis.
+- Le client peut demander une réinitialisation depuis `/account/forgot-password`. La réponse ne révèle jamais si l'adresse e-mail existe.
+- Le lien de réinitialisation expire après une heure, le token est stocké sous forme de hash et ne peut être consommé qu'une fois.
+- La page `/account/reset-password` impose un mot de passe d'au moins 12 caractères.
+- Les parcours d'activation et de réinitialisation sont protégés par une limitation de débit.
+
+
+## Historique des migrations
+- La migration initiale crée les tables métier de base et le limiteur de débit.
+- Les évolutions ultérieures sont ajoutées dans des dossiers de migration distincts : invitations client, session Checkout Stripe et tokens de réinitialisation.
+- Ne jamais modifier une migration déjà appliquée sur un environnement partagé ; ajouter une nouvelle migration pour chaque changement de schéma.

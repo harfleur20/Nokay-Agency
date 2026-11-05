@@ -44,7 +44,7 @@
 
 ## Phase 5 — Espace client
 - [x] Activation de compte client par invitation sécurisée et authentification
-- [ ] Récupération et réinitialisation de mot de passe
+- [x] Récupération et réinitialisation de mot de passe par lien à usage unique
 - [x] Tableau de bord client et suivi de projet (lecture)
 - [x] Consultation des devis, commandes et paiements enregistrés
 - [ ] Paiement en ligne et téléchargement des factures
@@ -52,7 +52,8 @@
 - [ ] Contrôle d'isolation des données entre clients
 
 ## Phase 6 — Qualité, conformité et lancement
-- [ ] Migrations Prisma versionnées et stratégie de sauvegarde/restauration
+- [x] Migrations Prisma incrémentales versionnées (sans réécriture des migrations appliquées)
+- [ ] Stratégie de sauvegarde/restauration
 - [ ] Tests unitaires, intégration et E2E
 - [ ] Audit sécurité et permissions
 - [ ] Accessibilité WCAG 2.2 AA

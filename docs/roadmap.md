@@ -29,6 +29,7 @@
 
 ## Phase 3 — Devis, commandes et paiements
 - [x] Création de devis brouillon depuis un lead dans le back-office
+- [x] Envoi du récapitulatif d’un devis par e-mail via Resend
 - [ ] Génération PDF, versionnement et acceptation client
 - [ ] Commandes et acomptes configurables
 - [ ] Stripe Checkout, webhooks signés et idempotents

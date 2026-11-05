@@ -5,7 +5,7 @@ export const pricing = {
     eyebrow: "Offres de lancement · Studio digital indépendant",
     title: "Du digital de qualité,<br />à un prix <em>accessible.</em>",
     intro: "NOKAY démarre son activité : profitez de tarifs de lancement pour les premiers projets. Des périmètres précis, des livrables concrets et aucun coût caché.",
-    note: "Tarifs de lancement en euros HT, réservés aux premiers projets et susceptibles d’évoluer. Le prix est confirmé dans un devis avant tout démarrage. Hébergement, nom de domaine, licences et services tiers ne sont pas inclus.",
+    note: "Tarifs de lancement en euros, réservés aux premiers projets et susceptibles d’évoluer. Le devis précise les taxes applicables selon votre statut et votre pays. Le prix et le périmètre sont confirmés avant tout démarrage. Hébergement, nom de domaine, licences et services tiers ne sont pas inclus.",
     categories: [
       { id: "websites", title: "Sites vitrines", intro: "Pour présenter votre activité, rassurer vos visiteurs et recevoir des demandes de contact.", packages: [
         { name: "Essentiel", price: "390 €", suffix: "prix de lancement", description: "Une présence professionnelle simple pour indépendant, artisan ou petite activité.", features: ["1 page longue avec 5 sections : accueil, services, à propos, témoignages fournis et contact", "Mise en page adaptée aux mobiles, tablettes et ordinateurs", "Formulaire de contact avec envoi vers votre adresse e-mail", "Intégration de vos textes et de 5 images maximum fournies", "Réglages SEO de base : titre, description et partage social", "Liens vers vos réseaux sociaux et bouton d’appel ou WhatsApp", "1 série de corrections après présentation", "Mise en ligne sur votre hébergement et mini-guide de prise en main"], timeline: "5 à 8 jours ouvrés", featured: false },
@@ -40,7 +40,7 @@ export const pricing = {
     eyebrow: "Launch offers · Independent digital studio",
     title: "Thoughtful digital work,<br />at an <em>accessible price.</em>",
     intro: "NOKAY is opening its doors: get launch pricing on the first projects. Clear scopes, tangible deliverables and no hidden costs.",
-    note: "Launch prices in USD for US clients and EUR for other international clients, excluding applicable taxes. Final scope and currency are confirmed in your quote. Hosting, domains, licences and third-party services are not included.",
+    note: "Prices are shown in USD as a reference for US clients. Other currencies and applicable taxes are confirmed in your quote based on your country and status. Hosting, domains, licences and third-party services are not included.",
     categories: [
       { id: "websites", title: "Websites", intro: "Present your business, build trust and turn visitors into enquiries.", packages: [
         { name: "Essential", price: "$450", suffix: "launch price", description: "A professional online presence for a freelancer or small business.", features: ["One long-form page with 5 sections: home, services, about, supplied testimonials and contact", "Responsive layouts for mobile, tablet and desktop", "Contact form delivered to your email address", "Your supplied copy and up to 5 images placed on the page", "Basic SEO titles, descriptions and social sharing metadata", "Social links and call or WhatsApp action", "One revision round after the first presentation", "Launch on your hosting and a short handover guide"], timeline: "5–8 business days", featured: false },

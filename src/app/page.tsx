@@ -1,6 +1,5 @@
 import { SiteHeader } from "@/components/site-header";
 import { Reveal } from "@/components/reveal";
-import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { prisma } from "@/lib/prisma";
 import { EditorialAccordion } from "@/components/editorial-accordion";
@@ -21,12 +20,12 @@ const concepts = [
 ];
 
 const steps = [
-  ["Découverte", "Nous échangeons sur votre activité, vos utilisateurs, vos enjeux et vos objectifs."],
-  ["Stratégie & conception", "Nous cadrons le besoin, définissons le périmètre et dessinons la solution."],
-  ["Design & prototypage", "Nous donnons forme à l’expérience avec des interfaces et prototypes à valider."],
-  ["Développement", "Nous construisons le produit avec une attention particulière à la qualité et aux performances."],
-  ["Tests & validation", "Nous vérifions les parcours, les contenus, l’affichage et les fonctionnalités."],
-  ["Livraison & accompagnement", "Nous préparons la mise en ligne et vous accompagnons dans la prise en main."],
+  { title: "Découverte", description: "Nous échangeons sur votre activité, vos utilisateurs, vos enjeux et vos objectifs." },
+  { title: "Stratégie & conception", description: "Nous cadrons le besoin, définissons le périmètre et dessinons la solution." },
+  { title: "Design & prototypage", description: "Nous donnons forme à l’expérience avec des interfaces et prototypes à valider." },
+  { title: "Développement", description: "Nous construisons le produit avec une attention particulière à la qualité et aux performances." },
+  { title: "Tests & validation", description: "Nous vérifions les parcours, les contenus, l’affichage et les fonctionnalités." },
+  { title: "Livraison & accompagnement", description: "Nous préparons la mise en ligne et vous accompagnons dans la prise en main." },
 ];
 
 export default async function Home() {
@@ -70,7 +69,7 @@ export default async function Home() {
 
       <section id="processus" className="section process-section"><div className="section-shell">
         <Reveal><div className="section-heading"><div><p className="eyebrow"><span className="eyebrow__line" /> Notre processus</p><h2>De l’idée<br /><span>à l’impact.</span></h2></div><p className="section-heading__aside">Un cadre clair, des échanges réguliers et une progression visible à chaque étape.</p></div></Reveal>
-        <EditorialAccordion items={steps.map(([title, description]) => ({ title, description }))} locale="fr" className="process-accordion" />
+        <EditorialAccordion items={steps} locale="fr" className="process-accordion" />
       </div></section>
 
       <section className="manifesto"><div className="section-shell manifesto__inner"><p className="eyebrow"><span className="eyebrow__line" /> Et si on construisait la suite ?</p><h2>Votre prochaine<br />idée mérite <span>mieux.</span></h2><a href="#contact" className="manifesto__link">Parlons de votre projet <span>↗</span></a></div></section>
